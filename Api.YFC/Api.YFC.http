@@ -1,0 +1,6 @@
+@Api.YFC_HostAddress = http://localhost:5152
+
+GET {{Api.YFC_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

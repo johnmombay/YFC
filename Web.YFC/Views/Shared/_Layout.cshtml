@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Yeshua Family Communities</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- LOAD CSS FILES -->
+    <link href="~/css/main.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div id="preloader"></div>
+    <div id="wrapper">
+        <!-- header begin -->
+        <partial name="_HeaderPartial" />
+        <!-- header close -->
+        @RenderBody();
+        <!-- footer begin -->
+        <partial name="_FooterPartial" />
+        <!-- footer close -->
+    </div>
+
+    <!-- LOAD JS FILES -->
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/jquery.isotope.min.js"></script>
+    <script src="~/js/jquery.prettyPhoto.js"></script>
+    <script src="~/js/easing.js"></script>
+    <script src="~/js/jquery.ui.totop.js"></script>
+    <script src="~/js/ender.js"></script>
+    <script src="~/js/responsiveslides.min.js"></script>
+    <script src="~/js/owl.carousel.js"></script>
+    <script src="~/js/jquery.fitvids.js"></script>
+    <script src="~/js/jquery.plugin.js"></script>
+    <script src="~/js/jquery.countdown.js"></script>
+    <script src="~/js/countdown-custom.js"></script>
+    <script src="~/js/wow.min.js"></script>
+    <script src="~/js/custom.js"></script>
+
+    <!-- SLIDER REVOLUTION SCRIPTS  -->
+    <script type="text/javascript" src="~/rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
+    <script type="text/javascript" src="~/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+    <script src="~/js/rev-setting-1.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>
