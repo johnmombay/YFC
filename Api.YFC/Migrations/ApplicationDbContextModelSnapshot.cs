@@ -22,34 +22,6 @@ namespace Api.YFC.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Api.YFC.Models.Contact", b =>
-                {
-                    b.Property<int>("ContactId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ContactId"));
-
-                    b.Property<DateTime>("ContactDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ContactId");
-
-                    b.ToTable("Contacts");
-                });
-
             modelBuilder.Entity("Api.YFC.Models.Event", b =>
                 {
                     b.Property<int>("EventId")
@@ -61,36 +33,8 @@ namespace Api.YFC.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("From")
+                    b.Property<DateTime>("EventDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Image")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("To")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("EventId");
-
-                    b.ToTable("Events");
-                });
-
-            modelBuilder.Entity("Api.YFC.Models.Gallery", b =>
-                {
-                    b.Property<int>("GalleryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GalleryId"));
 
                     b.Property<string>("Picture")
                         .IsRequired()
@@ -100,9 +44,13 @@ namespace Api.YFC.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("GalleryId");
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("Galleries");
+                    b.HasKey("EventId");
+
+                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("Api.YFC.Models.Headline", b =>
@@ -119,7 +67,7 @@ namespace Api.YFC.Migrations
                     b.Property<bool>("Enable")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Prompt")
+                    b.Property<string>("Subtitle")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -134,6 +82,31 @@ namespace Api.YFC.Migrations
                     b.HasKey("HeadlineId");
 
                     b.ToTable("Headlines");
+                });
+
+            modelBuilder.Entity("Api.YFC.Models.Insipiration", b =>
+                {
+                    b.Property<int>("InsipirationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InsipirationId"));
+
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("InsipirationId");
+
+                    b.ToTable("Inspirations");
                 });
 
             modelBuilder.Entity("Api.YFC.Models.Statement", b =>
@@ -155,6 +128,44 @@ namespace Api.YFC.Migrations
                     b.HasKey("StatementId");
 
                     b.ToTable("Statements");
+                });
+
+            modelBuilder.Entity("Api.YFC.Models.Teaching", b =>
+                {
+                    b.Property<int>("TeachingId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TeachingId"));
+
+                    b.Property<string>("Audio")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PDF")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Picture")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Speaker")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TeachingDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Video")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TeachingId");
+
+                    b.ToTable("Teachings");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

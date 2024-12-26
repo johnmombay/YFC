@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Web.YFC.Models;
 
 namespace Web.YFC.Data
 {
@@ -9,5 +10,12 @@ namespace Web.YFC.Data
 			: base(options)
 		{
 		}
+
+		public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+		public DbSet<Event> Events { get; set; }
+		public DbSet<Headline> Headlines { get; set; }
+		public DbSet<Inspiiration> Inspirations { get; set; }
+		public DbSet<Statement> Statements { get; set; }
+		public DbSet<Teaching> Teachings { get; set; }
 	}
 }

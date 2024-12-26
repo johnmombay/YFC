@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.YFC", "Api.YFC\Api.YFC.csproj", "{48E6DF5F-AAB0-47F7-BF09-3AD4A6DAEA7B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.YFC", "Web.YFC\Web.YFC.csproj", "{1A4A5DB7-534D-4E63-B91D-71D9DCE86CD2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Admin.YFC", "Admin.YFC\Admin.YFC.csproj", "{F3DCE6F9-C7D2-4207-B85B-A412E2B7A6EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{1A4A5DB7-534D-4E63-B91D-71D9DCE86CD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A4A5DB7-534D-4E63-B91D-71D9DCE86CD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A4A5DB7-534D-4E63-B91D-71D9DCE86CD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3DCE6F9-C7D2-4207-B85B-A412E2B7A6EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3DCE6F9-C7D2-4207-B85B-A412E2B7A6EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3DCE6F9-C7D2-4207-B85B-A412E2B7A6EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3DCE6F9-C7D2-4207-B85B-A412E2B7A6EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

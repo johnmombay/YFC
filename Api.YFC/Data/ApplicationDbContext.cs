@@ -13,9 +13,9 @@ namespace Api.YFC.Data
 
 		public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 		public DbSet<Event> Events { get; set; }
-		public DbSet<Gallery> Galleries { get; set; }
 		public DbSet<Headline> Headlines { get; set; }
+		public DbSet<Inspiiration> Inspirations { get; set; }
 		public DbSet<Statement> Statements { get; set; }
-		public DbSet<Contact> Contacts { get; set; }
+		public DbSet<Teaching> Teachings { get; set; }
 	}
 }
