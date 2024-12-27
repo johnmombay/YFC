@@ -1,0 +1,56 @@
+﻿@model Admin.YFC.Models.Teaching
+<div class="">
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Delete Teaching</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="row">
+                        <div class="col-sm-10 ">
+                            <form asp-action="Delete" asp-route-id="@ViewBag.TeachingId">
+                                <input type="hidden" asp-for="TeachingId" value="@ViewBag.TeachingId" />
+                                <div class="form-group">
+                                    <label asp-for="Title"></label>
+                                    <input asp-for="Title" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Speaker"></label>
+                                    <input asp-for="Speaker" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="TeachingDate"></label>
+                                    <input asp-for="TeachingDate" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Picture"></label>
+                                    <input type="file" asp-for="Picture" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Video"></label>
+                                    <input asp-for="Video" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Audio"></label>
+                                    <input asp-for="Audio" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="PDF"></label>
+                                    <input asp-for="PDF" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

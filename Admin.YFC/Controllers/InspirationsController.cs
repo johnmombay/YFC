@@ -20,7 +20,7 @@ namespace Admin.YFC.Controllers
 
 		public async Task<IActionResult> GetInspirations()
 		{
-			var inspirations = await _inspirationServices.g();
+			var inspirations = await _inspirationServices.GetInspirations();
 			return Json(new { data = inspirations });
 		}
 
@@ -29,6 +29,7 @@ namespace Admin.YFC.Controllers
 			return View();
 		}
 
+		[HttpPost]
 		public async Task<IActionResult> Create([Bind("Title,Message,Author")] Inspiration inspiration)
 		{
 			if (ModelState.IsValid)
@@ -41,10 +42,12 @@ namespace Admin.YFC.Controllers
 
 		public async Task<IActionResult> Edit(int id)
 		{
+			ViewBag.InspirationId = id;
 			var inspiration = await _inspirationServices.GetInspirationById(id);
 			return View(inspiration);
 		}
 
+		[HttpPost]
 		public async Task<IActionResult> Edit(int id, [Bind("InspirationId,Title,Message,Author")] Inspiration inspiration)
 		{
 			if (ModelState.IsValid)
@@ -57,6 +60,7 @@ namespace Admin.YFC.Controllers
 
 		public async Task<IActionResult> Remove(int id)
 		{
+			ViewBag.InspirationId = id;
 			var inspiration = await _inspirationServices.GetInspirationById(id);
 			return View(inspiration);
 		}

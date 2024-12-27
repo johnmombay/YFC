@@ -91,7 +91,7 @@ namespace Api.YFC.Migrations
                 name: "Inspirations",
                 columns: table => new
                 {
-                    InsipirationId = table.Column<int>(type: "int", nullable: false)
+                    InspirationId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Message = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -99,7 +99,7 @@ namespace Api.YFC.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Inspirations", x => x.InsipirationId);
+                    table.PrimaryKey("PK_Inspirations", x => x.InspirationId);
                 });
 
             migrationBuilder.CreateTable(

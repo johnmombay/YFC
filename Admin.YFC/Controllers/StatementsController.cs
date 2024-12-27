@@ -28,6 +28,7 @@ namespace Admin.YFC.Controllers
 			return View();
 		}
 
+		[HttpPost]
 		public async Task<IActionResult> Create([Bind("Message,Author")] Statement statement)
 		{
 			if (ModelState.IsValid)
@@ -40,10 +41,12 @@ namespace Admin.YFC.Controllers
 
 		public async Task<IActionResult> Edit(int id)
 		{
+			ViewBag.StatementId = id;
 			var statement = await _statementServices.GetStatementById(id);
 			return View(statement);
 		}
 
+		[HttpPost]
 		public async Task<IActionResult> Edit(int id, [Bind("StatementId,Message,Author")] Statement statement)
 		{
 			if (ModelState.IsValid)
@@ -56,6 +59,7 @@ namespace Admin.YFC.Controllers
 
 		public async Task<IActionResult> Remove(int id)
 		{
+			ViewBag.StatementId = id;
 			var statement = await _statementServices.GetStatementById(id);
 			return View(statement);
 		}

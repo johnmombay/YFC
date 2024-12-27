@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api.YFC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241226053535_InitialDb")]
+    [Migration("20241227095520_InitialDb")]
     partial class InitialDb
     {
         /// <inheritdoc />
@@ -87,13 +87,13 @@ namespace Api.YFC.Migrations
                     b.ToTable("Headlines");
                 });
 
-            modelBuilder.Entity("Api.YFC.Models.Insipiration", b =>
+            modelBuilder.Entity("Api.YFC.Models.Inspiration", b =>
                 {
-                    b.Property<int>("InsipirationId")
+                    b.Property<int>("InspirationId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InsipirationId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InspirationId"));
 
                     b.Property<string>("Author")
                         .IsRequired()
@@ -107,7 +107,7 @@ namespace Api.YFC.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("InsipirationId");
+                    b.HasKey("InspirationId");
 
                     b.ToTable("Inspirations");
                 });

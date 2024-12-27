@@ -8,6 +8,7 @@ namespace Api.YFC.Models
 		public string Title {  get; set; } = default!;
 		public string Subtitle { get; set; } = default!;
 		public string? Description { get; set; }
+		public string Picture { get; set; } = default!;
 		public string Url { get; set; } = default!;
 		public bool Enable {  get; set; }
 	}

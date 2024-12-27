@@ -40,5 +40,6 @@ namespace Admin.YFC.Common
 		public static string InspirationEndpoint = "/Inspirations";
 		public static string StatementEndpoint = "/Statements";
 		public static string TeachingEndpoint = "/Teachings";
+		public static string FileUploadEndpoint = "/FileUpload";
 	}
 }

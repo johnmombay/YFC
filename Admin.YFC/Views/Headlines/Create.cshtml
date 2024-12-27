@@ -1,0 +1,51 @@
+﻿@model Admin.YFC.Models.Headline
+<div class="">
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>New Headline</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="row">
+                        <div class="col-sm-10 ">
+                            <form asp-action="Create">
+                                <div class="form-group">
+                                    <label asp-for="Title"></label>
+                                    <input asp-for="Title" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Subtitle"></label>
+                                    <input asp-for="Subtitle" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Description"></label>
+                                    <input asp-for="Description" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Url"></label>
+                                    <input asp-for="Url" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Picture"></label>
+                                    <input type="file" asp-for="Picture" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Enable"></label>
+                                    <input asp-for="Enable" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

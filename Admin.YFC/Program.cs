@@ -1,4 +1,5 @@
 using Admin.YFC.Data;
+using Admin.YFC.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +14,14 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
 	.AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<EventServices, EventServices>();
+builder.Services.AddScoped<InspirationServices, InspirationServices>();
+builder.Services.AddScoped<HeadlineServices, HeadlineServices>();
+builder.Services.AddScoped<TeachingServices, TeachingServices>();
+builder.Services.AddScoped<InspirationServices,InspirationServices>();
+builder.Services.AddScoped<UserServices, UserServices>();
+builder.Services.AddScoped<StatementServices, StatementServices>();
 
 var app = builder.Build();
 
