@@ -32,16 +32,14 @@ namespace Admin.YFC.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Create(IFormFile file, [Bind("Title,Speaker,TeachingDate,Picture,Video,Audio,PDF")] Teaching teaching)
+		public async Task<IActionResult> Create(IFormFile file, [Bind("Title,Speaker,TeachingDate,Video,Audio,PDF")] Teaching teaching)
 		{
-			if (ModelState.IsValid)
+			teaching.Picture = file.FileName;
+			if (file != null)
 			{
-				if(file != null)
-				{
-					await _fileUploadServices.Upload(file, "Teachings/" + teaching.TeachingId + "/", file.FileName);
-					await _teachingServices.AddTeaching(teaching);
-					return RedirectToAction("Index");
-				}
+				await _fileUploadServices.Upload(file, "Teachings/" + teaching.TeachingId + "/", file.FileName);
+				await _teachingServices.AddTeaching(teaching);
+				return RedirectToAction("Index");
 			}
 			return View(teaching);
 		}
@@ -56,16 +54,12 @@ namespace Admin.YFC.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Edit(IFormFile file, int id, [Bind("TeachingId,Title,Speaker,TeachingDate,Picture,Video,Audio,PDF")] Teaching teaching)
 		{
-			if (ModelState.IsValid)
+			if (file != null)
 			{
-				if (file != null)
-				{
-					await _fileUploadServices.Upload(file, "Teachings/" + teaching.TeachingId + "/", file.FileName);
-				}
-				await _teachingServices.UpdateTeaching(teaching);
-				return RedirectToAction("Index");
+				await _fileUploadServices.Upload(file, "Teachings/" + teaching.TeachingId + "/", file.FileName);
 			}
-			return View(teaching);
+			await _teachingServices.UpdateTeaching(teaching);
+			return RedirectToAction("Index");
 		}
 
 		public async Task<IActionResult> Remove(int id)

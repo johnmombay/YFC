@@ -22,6 +22,7 @@ builder.Services.AddScoped<TeachingServices, TeachingServices>();
 builder.Services.AddScoped<InspirationServices,InspirationServices>();
 builder.Services.AddScoped<UserServices, UserServices>();
 builder.Services.AddScoped<StatementServices, StatementServices>();
+builder.Services.AddScoped<FileUploadServices, FileUploadServices>();
 
 var app = builder.Build();
 

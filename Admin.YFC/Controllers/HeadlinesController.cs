@@ -32,16 +32,14 @@ namespace Admin.YFC.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Create(IFormFile file, [Bind("Title,Subtitle,Description,Picture,Url,Enable")] Headline headline)
+		public async Task<IActionResult> Create(IFormFile file, [Bind("Title,Subtitle,Description,Url,Enable")] Headline headline)
 		{
-			if (ModelState.IsValid)
+			headline.Picture = file.FileName;
+			if (file != null)
 			{
-				if (file != null)
-				{
-					await _fileUploadServices.Upload(file, "Headlines/" + headline.HeadlineId + "/", file.FileName);
-					await _headlineServices.AddHeadline(headline);
-					return RedirectToAction("Index");
-				}
+				await _fileUploadServices.Upload(file, "Headlines/" + headline.HeadlineId + "/", file.FileName);
+				await _headlineServices.AddHeadline(headline);
+				return RedirectToAction("Index");
 			}
 			return View(headline);
 		}
@@ -54,18 +52,14 @@ namespace Admin.YFC.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Edit(IFormFile file, int id, [Bind("HeadlineId,Title,Subtitle,Description,Picture,Url,Enable")] Headline headline)
+		public async Task<IActionResult> Edit(IFormFile file, int id, [Bind("HeadlineId,Title,Subtitle,Description,Url,Enable")] Headline headline)
 		{
-			if (ModelState.IsValid)
+			if (file != null)
 			{
-				if (file != null)
-				{
-					await _fileUploadServices.Upload(file, "Headlines/" + headline.HeadlineId + "/", file.FileName);
-				}
-				await _headlineServices.UpdateHeadline(headline);
-				return RedirectToAction("Index");
+				await _fileUploadServices.Upload(file, "Headlines/" + headline.HeadlineId + "/", file.FileName);
 			}
-			return View(headline);
+			await _headlineServices.UpdateHeadline(headline);
+			return RedirectToAction("Index");
 		}
 
 		public async Task<IActionResult> Remove(int id)

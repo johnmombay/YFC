@@ -32,16 +32,14 @@ namespace Admin.YFC.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Create(IFormFile file, [Bind("Title,Description,EventDate,Picture,Url")] Event @event)
+		public async Task<IActionResult> Create(IFormFile file, [Bind("Title,Description,EventDate,Url")] Event @event)
 		{
-			if (ModelState.IsValid)
+			@event.Picture = file.FileName;
+			if (file != null)
 			{
-				if (file != null)
-				{
-					await _fileUploadServices.Upload(file, "Events/" + @event.EventId + "/", file.FileName);
-					await _eventServices.AddEvent(@event);
-					return RedirectToAction("Index");
-				}
+				await _fileUploadServices.Upload(file, "Events/" + @event.EventId + "/", file.FileName);
+				await _eventServices.AddEvent(@event);
+				return RedirectToAction("Index");
 			}
 			return View(@event);
 		}
@@ -54,18 +52,14 @@ namespace Admin.YFC.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Edit(IFormFile file, int id, [Bind("EventId,Title,Description,EventDate,Picture,Url")] Event @event)
+		public async Task<IActionResult> Edit(IFormFile file, int id, [Bind("EventId,Title,Description,EventDate,Url")] Event @event)
 		{
-			if (ModelState.IsValid)
+			if (file != null)
 			{
-				if (file != null)
-				{
-					await _fileUploadServices.Upload(file, "Events/" + @event.EventId + "/", file.FileName);
-				}
-				await _eventServices.UpdateEvent(@event);
-				return RedirectToAction("Index");
+				await _fileUploadServices.Upload(file, "Events/" + @event.EventId + "/", file.FileName);
 			}
-			return View(@event);
+			await _eventServices.UpdateEvent(@event);
+			return RedirectToAction("Index");
 		}
 
 		public async Task<IActionResult> Remove(int id)
