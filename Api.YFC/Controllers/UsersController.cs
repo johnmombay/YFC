@@ -291,5 +291,50 @@ namespace Api.YFC.Controllers
 				return BadRequest();
 			}
 		}
+
+		[HttpPost]
+		[Route("ForgotPassword")]
+		public async Task<ActionResult> ForgotPassword(string email)
+		{
+			try
+			{
+				var user = await _userManager.FindByEmailAsync(email);
+				if (user is not null)
+				{
+					var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+					return Ok(token);
+				}
+				return BadRequest();
+			}
+			catch (Exception ex)
+			{
+				_logger.LogInformation("Exception error on Forgot Password (UsersController) : " + ex.HResult + " - " + ex.Message);
+				return BadRequest();
+			}
+		}
+
+		[HttpPost]
+		[Route("ResetPassword")]
+		public async Task<ActionResult> ResetPassword(string email, string token, string password)
+		{
+			try
+			{
+				var user = await _userManager.FindByEmailAsync(email);
+				if (user is not null)
+				{
+					var result = await _userManager.ResetPasswordAsync(user, token, password);
+					if (result.Succeeded)
+					{
+						return Ok(true);
+					}
+				}
+				return BadRequest();
+			}
+			catch (Exception ex)
+			{
+				_logger.LogInformation("Exception error on Reset Password (UsersController) : " + ex.HResult + " - " + ex.Message);
+				return BadRequest();
+			}
+		}
 	}
 }
