@@ -37,9 +37,12 @@ namespace Admin.YFC.Controllers
 			@event.Picture = file.FileName;
 			if (file != null)
 			{
-				await _fileUploadServices.Upload(file, "Events/" + @event.EventId + "/", file.FileName);
-				await _eventServices.AddEvent(@event);
-				return RedirectToAction("Index");
+				var newevent = await _eventServices.AddEvent(@event);
+				if(newevent.EventId > 0)
+				{
+					await _fileUploadServices.Upload(file, "Events/" + newevent.EventId + "/", file.FileName);
+					return RedirectToAction("Index");
+				}
 			}
 			return View(@event);
 		}
@@ -48,15 +51,18 @@ namespace Admin.YFC.Controllers
 		{
 			ViewBag.EventId = id;
 			var @event = await _eventServices.GetEventById(id);
+			ViewBag.Picture = @event.Picture;
 			return View(@event);
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Edit(IFormFile file, int id, [Bind("EventId,Title,Description,EventDate,Url")] Event @event)
+		public async Task<IActionResult> Edit(IFormFile file, int id, [Bind("EventId,Title,Description,EventDate,Picture,Url")] Event @event)
 		{
 			if (file != null)
 			{
 				await _fileUploadServices.Upload(file, "Events/" + @event.EventId + "/", file.FileName);
+				await _fileUploadServices.Remove("Events", @event.EventId.ToString(), @event.Picture);
+				@event.Picture = file.FileName;
 			}
 			await _eventServices.UpdateEvent(@event);
 			return RedirectToAction("Index");

@@ -15,6 +15,7 @@
                         <div class="col-sm-10 ">
                             <form asp-action="Edit" enctype="multipart/form-data">
                                 <input type="hidden" asp-for="TeachingId" value="@ViewBag.TeachingId" />
+                                <input type="hidden" asp-for="Picture" value="@ViewBag.Picture" />
                                 <div class="form-group">
                                     <label asp-for="Title"></label>
                                     <input asp-for="Title" class="form-control" />

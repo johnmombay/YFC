@@ -37,9 +37,12 @@ namespace Admin.YFC.Controllers
 			teaching.Picture = file.FileName;
 			if (file != null)
 			{
-				await _fileUploadServices.Upload(file, "Teachings/" + teaching.TeachingId + "/", file.FileName);
-				await _teachingServices.AddTeaching(teaching);
-				return RedirectToAction("Index");
+				var newteaching = await _teachingServices.AddTeaching(teaching);
+				if (newteaching.TeachingId > 0)
+				{
+					await _fileUploadServices.Upload(file, "Teachings/" + newteaching.TeachingId + "/", file.FileName);
+					return RedirectToAction("Index");
+				}
 			}
 			return View(teaching);
 		}
@@ -48,6 +51,7 @@ namespace Admin.YFC.Controllers
 		{
 			ViewBag.TeachingId = id;
 			var teaching = await _teachingServices.GetTeachingById(id);
+			ViewBag.Picture = teaching.Picture;
 			return View(teaching);
 		}
 
@@ -57,6 +61,8 @@ namespace Admin.YFC.Controllers
 			if (file != null)
 			{
 				await _fileUploadServices.Upload(file, "Teachings/" + teaching.TeachingId + "/", file.FileName);
+				await _fileUploadServices.Remove("Teachings", teaching.TeachingId.ToString(), teaching.Picture);
+				teaching.Picture = file.FileName;
 			}
 			await _teachingServices.UpdateTeaching(teaching);
 			return RedirectToAction("Index");

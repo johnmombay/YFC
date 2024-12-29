@@ -37,9 +37,12 @@ namespace Admin.YFC.Controllers
 			headline.Picture = file.FileName;
 			if (file != null)
 			{
-				await _fileUploadServices.Upload(file, "Headlines/" + headline.HeadlineId + "/", file.FileName);
-				await _headlineServices.AddHeadline(headline);
-				return RedirectToAction("Index");
+				var newheadline = await _headlineServices.AddHeadline(headline);
+				if (newheadline.HeadlineId > 0)
+				{
+					await _fileUploadServices.Upload(file, "Headlines/" + newheadline.HeadlineId + "/", file.FileName);
+					return RedirectToAction("Index");
+				}
 			}
 			return View(headline);
 		}
@@ -48,15 +51,18 @@ namespace Admin.YFC.Controllers
 		{
 			ViewBag.HeadlineId = id;
 			var headline = await _headlineServices.GetHeadlineById(id);
+			ViewBag.Picture = headline.Picture;
 			return View(headline);
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Edit(IFormFile file, int id, [Bind("HeadlineId,Title,Subtitle,Description,Url,Enable")] Headline headline)
+		public async Task<IActionResult> Edit(IFormFile file, int id, [Bind("HeadlineId,Title,Subtitle,Description,Picture,Url,Enable")] Headline headline)
 		{
 			if (file != null)
 			{
 				await _fileUploadServices.Upload(file, "Headlines/" + headline.HeadlineId + "/", file.FileName);
+				await _fileUploadServices.Remove("Headlines", headline.HeadlineId.ToString(), headline.Picture);
+				headline.Picture = file.FileName;
 			}
 			await _headlineServices.UpdateHeadline(headline);
 			return RedirectToAction("Index");
