@@ -77,3 +77,19 @@ $(document).ready(function () {
         ]
     });
 });
+
+$(document).ready(function () {
+    $('#users').DataTable({
+        "ajax": "Users/GetUsers",
+        "columns": [
+            { "data": "firstname" },
+            { "data": "lastname" },
+            { "data": "email" },
+            {
+                "render": function (data, type, row) {
+                    return "<a href='Users/Edit/" + row.id + "'; class='btn btn-dark btn-sm'>Update</a><a href = 'Users/Remove/" + row.id + "'; class='btn btn-danger btn-sm' > Delete</a >";
+                }
+            }
+        ]
+    });
+});

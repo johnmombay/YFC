@@ -44,6 +44,16 @@ namespace Admin.YFC.Services
 			return applicationUser;
 		}
 
+		public async Task<bool> RemoveUser(string id)
+		{
+			var result = await RestCall.Remove(AppSettings.ApiUri + EndPoints.UserEndpoint + "/Delete/" + id);
+			if (!string.IsNullOrWhiteSpace(result))
+			{
+				return true;
+			}
+			return false;
+		}
+
 		public async Task<ApplicationUser> GetUser(string id)
 		{
 			ApplicationUser user = new ApplicationUser();

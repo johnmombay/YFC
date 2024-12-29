@@ -1,4 +1,5 @@
-﻿using Admin.YFC.Models;
+﻿using Admin.YFC.Common;
+using Admin.YFC.Models;
 using Admin.YFC.Services;
 using Admin.YFC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -30,6 +31,7 @@ namespace Admin.YFC.Controllers
 			return View();
 		}
 
+		[HttpPost]
 		public async Task<IActionResult> Create([Bind("Firstname,Lastname,Email,Password,Role")] RegisterViewModel register)
 		{
 			if (ModelState.IsValid)
@@ -43,9 +45,12 @@ namespace Admin.YFC.Controllers
 		public async Task<IActionResult> Edit(string id)
 		{
 			var user = await _userServices.GetUser(id);
+			ViewBag.Id = id;
+			ViewBag.Email = user.Email;
 			return View(user);
 		}
 
+		[HttpPost]
 		public async Task<IActionResult> Edit(string id, [Bind("Id,Firstname,Lastname,Email")] ApplicationUser user)
 		{
 			if (ModelState.IsValid)
@@ -54,6 +59,20 @@ namespace Admin.YFC.Controllers
 				return RedirectToAction("Index");
 			}
 			return View(user);
-		}		
+		}
+
+		public async Task<IActionResult> Remove(string id)
+		{
+			var user = await _userServices.GetUser(id);
+			ViewBag.Id = id;
+			ViewBag.Email = user.Email;
+			return View(user);
+		}
+
+		public async Task<IActionResult> Delete(string id)
+		{
+			await _userServices.RemoveUser(id);
+			return RedirectToAction("Index");
+		}
 	}
 }
