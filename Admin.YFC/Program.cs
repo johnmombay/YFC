@@ -24,6 +24,10 @@ builder.Services.AddScoped<InspirationServices,InspirationServices>();
 builder.Services.AddScoped<UserServices, UserServices>();
 builder.Services.AddScoped<StatementServices, StatementServices>();
 builder.Services.AddScoped<FileUploadServices, FileUploadServices>();
+builder.Services.AddScoped<CommunityServices, CommunityServices>();
+builder.Services.AddScoped<CommunityInfoServices, CommunityInfoServices>();
+builder.Services.AddScoped<MinistryServices, MinistryServices>();
+builder.Services.AddScoped<MinistryInfoServices, MinistryInfoServices>();
 
 var app = builder.Build();
 

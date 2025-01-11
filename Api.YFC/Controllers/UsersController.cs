@@ -272,69 +272,21 @@ namespace Api.YFC.Controllers
 		}
 
 		[HttpPost]
-		[Route("ChangePassword")]
-		public async Task<ActionResult> ChangePassword(ChangePasswordViewModel changePasswordViewModel)
+		[Route("ResetPassword")]
+		public async Task<ActionResult> ResetPassword(ResetPasswordViewModel resetPasswordViewModel)
 		{
-			try
+			var user = await _userManager.FindByIdAsync(resetPasswordViewModel.Id);
+			if(user is not null)
 			{
-				var user = await _userManager.FindByIdAsync(changePasswordViewModel.Id);
-				var identityResult = await _userManager.ChangePasswordAsync(user!, changePasswordViewModel.CurrentPassword, changePasswordViewModel.NewPassword);
-				if (identityResult.Succeeded)
+				var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+				var result = await _userManager.ResetPasswordAsync(user, token, resetPasswordViewModel.NewPassword);
+				if (result.Succeeded)
 				{
 					return Ok(true);
 				}
-				return BadRequest(false);
 			}
-			catch (Exception ex)
-			{
-				_logger.LogInformation("Exception error on Change Password (UsersController) : " + ex.HResult + " - " + ex.Message);
-				return BadRequest();
-			}
+			return BadRequest();
 		}
 
-		[HttpPost]
-		[Route("ForgotPassword")]
-		public async Task<ActionResult> ForgotPassword(string email)
-		{
-			try
-			{
-				var user = await _userManager.FindByEmailAsync(email);
-				if (user is not null)
-				{
-					var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-					return Ok(token);
-				}
-				return BadRequest();
-			}
-			catch (Exception ex)
-			{
-				_logger.LogInformation("Exception error on Forgot Password (UsersController) : " + ex.HResult + " - " + ex.Message);
-				return BadRequest();
-			}
-		}
-
-		[HttpPost]
-		[Route("ResetPassword")]
-		public async Task<ActionResult> ResetPassword(string email, string token, string password)
-		{
-			try
-			{
-				var user = await _userManager.FindByEmailAsync(email);
-				if (user is not null)
-				{
-					var result = await _userManager.ResetPasswordAsync(user, token, password);
-					if (result.Succeeded)
-					{
-						return Ok(true);
-					}
-				}
-				return BadRequest();
-			}
-			catch (Exception ex)
-			{
-				_logger.LogInformation("Exception error on Reset Password (UsersController) : " + ex.HResult + " - " + ex.Message);
-				return BadRequest();
-			}
-		}
 	}
 }

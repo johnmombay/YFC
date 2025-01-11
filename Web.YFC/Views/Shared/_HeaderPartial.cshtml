@@ -31,8 +31,12 @@
                         </li>
                         <li>
                             <a href="sermons.html">Ministries</a>
+                            @await Component.InvokeAsync("MinistryComponent")
                         </li>
-                        <li><a href="features.html">Communities</a></li>
+                        <li>
+                            <a href="features.html">Communities</a>
+                            @await Component.InvokeAsync("CommunityComponent")
+                        </li>
                         <li>
                             <a href="news.html">Contact Us</a>
                         </li>

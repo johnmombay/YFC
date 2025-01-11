@@ -1,0 +1,8 @@
+﻿@model List<Web.YFC.Models.Ministry>
+
+<ul>
+    @foreach (var ministry in Model)
+    {
+        <li><a asp-action="Index" asp-controller="Ministries" asp-route-id="@ministry.MinistryId">@ministry.Name</a></li>
+    }
+</ul>

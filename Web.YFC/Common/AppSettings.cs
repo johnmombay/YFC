@@ -25,6 +25,7 @@ namespace Web.YFC.Common
 		public static string ApiUri = Config.Get("ApiUrl");
 		public static string ApiKey = Config.Get("ApiKey");
 		public static string ApiSecret = Config.Get("ApiSecret");
+		public static string ImageUrl = Config.Get("ImageUrl");
 
 		public static JsonSerializerOptions options = new JsonSerializerOptions
 		{
@@ -40,5 +41,10 @@ namespace Web.YFC.Common
 		public static string InspirationEndpoint = "/Inspirations";
 		public static string StatementEndpoint = "/Statements";
 		public static string TeachingEndpoint = "/Teachings";
+		public static string FileUploadEndpoint = "/FileUpload";
+		public static string CommunityEndpoint = "/Communities";
+		public static string CommunityInfoEndpoint = "/CommunityInfos";
+		public static string MinistryEndpoint = "/Ministries";
+		public static string MinistryInfoEndpoint = "/MinistryInfos";
 	}
 }

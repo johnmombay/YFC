@@ -2,65 +2,65 @@
 using Web.YFC.Models;
 using System.Text.Json;
 
-namespace Admin.YFC.Services
+namespace Web.YFC.Services
 {
 	public class InspirationServices
 	{
-		public async Task<List<Statement>> GetStatements()
+		public async Task<List<Inspiration>> GetInspirations()
 		{
-			List<Statement> contacts = new List<Statement>();
+			List<Inspiration> contacts = new List<Inspiration>();
 
-			var result = await RestCall.Get(AppSettings.ApiUri + EndPoints.StatementEndpoint);
+			var result = await RestCall.Get(AppSettings.ApiUri + EndPoints.InspirationEndpoint);
 			if (!string.IsNullOrWhiteSpace(result))
 			{
-				contacts = JsonSerializer.Deserialize<List<Statement>>(result, AppSettings.options)!;
+				contacts = JsonSerializer.Deserialize<List<Inspiration>>(result, AppSettings.options)!;
 			}
 			return contacts;
 		}
 
-		public async Task<Statement> GetStatementById(int id)
+		public async Task<Inspiration> GetInspirationById(int id)
 		{
-			Statement Statement = new Statement();
+			Inspiration Inspiration = new Inspiration();
 
-			var result = await RestCall.Get(AppSettings.ApiUri + EndPoints.StatementEndpoint + "/" + id);
+			var result = await RestCall.Get(AppSettings.ApiUri + EndPoints.InspirationEndpoint + "/" + id);
 			if (!string.IsNullOrWhiteSpace(result))
 			{
-				Statement = JsonSerializer.Deserialize<Statement>(result, AppSettings.options)!;
+				Inspiration = JsonSerializer.Deserialize<Inspiration>(result, AppSettings.options)!;
 			}
-			return Statement;
+			return Inspiration;
 		}
 
-		public async Task<Statement> AddStatement(Statement Statement)
+		public async Task<Inspiration> AddInspiration(Inspiration Inspiration)
 		{
-			Statement StatementDb = new Statement();
+			Inspiration InspirationDb = new Inspiration();
 
-			var data = JsonSerializer.Serialize(Statement).ToString();
-			var result = await RestCall.Post(AppSettings.ApiUri + EndPoints.StatementEndpoint, data);
+			var data = JsonSerializer.Serialize(Inspiration).ToString();
+			var result = await RestCall.Post(AppSettings.ApiUri + EndPoints.InspirationEndpoint, data);
 			if (!string.IsNullOrWhiteSpace(result))
 			{
-				StatementDb = JsonSerializer.Deserialize<Statement>(result, AppSettings.options)!;
-				return StatementDb;
+				InspirationDb = JsonSerializer.Deserialize<Inspiration>(result, AppSettings.options)!;
+				return InspirationDb;
 			}
-			return Statement;
+			return Inspiration;
 		}
 
-		public async Task<Statement> UpdateStatement(Statement Statement)
+		public async Task<Inspiration> UpdateInspiration(Inspiration Inspiration)
 		{
-			Statement StatementDb = new Statement();
-			var data = JsonSerializer.Serialize(Statement).ToString();
-			await RestCall.Put(AppSettings.ApiUri + EndPoints.StatementEndpoint + "/" + Statement.StatementId, data);
-			var result = await RestCall.Get(AppSettings.ApiUri + EndPoints.StatementEndpoint + "/" + Statement.StatementId);
+			Inspiration InspirationDb = new Inspiration();
+			var data = JsonSerializer.Serialize(Inspiration).ToString();
+			await RestCall.Put(AppSettings.ApiUri + EndPoints.InspirationEndpoint + "/" + Inspiration.InspirationId, data);
+			var result = await RestCall.Get(AppSettings.ApiUri + EndPoints.InspirationEndpoint + "/" + Inspiration.InspirationId);
 			if (!string.IsNullOrWhiteSpace(result))
 			{
-				StatementDb = JsonSerializer.Deserialize<Statement>(result, AppSettings.options)!;
-				return StatementDb;
+				InspirationDb = JsonSerializer.Deserialize<Inspiration>(result, AppSettings.options)!;
+				return InspirationDb;
 			}
-			return Statement;
+			return Inspiration;
 		}
 
-		public async Task<string> DeleteStatement(int id)
+		public async Task<string> DeleteInspiration(int id)
 		{
-			var result = await RestCall.Remove(AppSettings.ApiUri + EndPoints.StatementEndpoint + "/" + id);
+			var result = await RestCall.Remove(AppSettings.ApiUri + EndPoints.InspirationEndpoint + "/" + id);
 			return result;
 		}
 	}

@@ -1,152 +1,62 @@
-﻿<!-- slider -->
+﻿@using Web.YFC.Common
+<!-- slider -->
 <div id="slider">
     <!-- revolution slider begin -->
     <div class="fullwidthbanner-container">
         <div id="revolution-slider">
             <ul>
-                <li data-transition="fade" data-slotamount="10" data-masterspeed="1500">
-                    <!--  BACKGROUND IMAGE -->
-                    <img src="img-rev-slider/bg-1.jpg" alt="">
-                    <div class="tp-caption border-v lft"
-                         data-x="540"
-                         data-y="center"
-                         data-speed="800"
-                         data-start="400"
-                         data-easing="easeInOutCubic"
-                         data-endspeed="300">
-                    </div>
+                @foreach(var headline in ViewData["Headlines"] as List<Headline>)
+                {
+                    <li data-transition="fade" data-slotamount="10" data-masterspeed="1500">
+                        <!--  BACKGROUND IMAGE -->
+                        <img src="@AppSettings.ImageUrl/Headlines/@headline.HeadlineId/@headline.Picture" alt="">
+                        <div class="tp-caption border-v lft"
+                        data-x="540"
+                        data-y="center"
+                        data-speed="800"
+                        data-start="400"
+                        data-easing="easeInOutCubic"
+                        data-endspeed="300">
+                        </div>
 
-                    <div class="tp-caption custom-font-1 lft"
-                         data-x="600"
-                         data-y="140"
-                         data-speed="800"
-                         data-start="1000"
-                         data-easing="easeInOutCubic"
-                         data-endspeed="300">
-                        Transforming Live
-                    </div>
+                        <div class="tp-caption custom-font-1 lft"
+                        data-x="600"
+                        data-y="140"
+                        data-speed="800"
+                        data-start="1000"
+                        data-easing="easeInOutCubic"
+                        data-endspeed="300">
+                            @headline.Subtitle
+                        </div>
 
-                    <div class="tp-caption lft custom-font-2"
-                         data-x="600"
-                         data-y="190"
-                         data-speed="800"
-                         data-start="800"
-                         data-easing="easeInOutCubic">
-                        Restoring Hope
-                    </div>
+                        <div class="tp-caption lft custom-font-2"
+                        data-x="600"
+                        data-y="190"
+                        data-speed="800"
+                        data-start="800"
+                        data-easing="easeInOutCubic">
+                            @headline.Title
+                        </div>
 
-                    <div class="tp-caption sfb text-left"
-                         data-x="600"
-                         data-y="240"
-                         data-speed="800"
-                         data-start="1400"
-                         data-easing="easeInOutCubic">
-                        Transforming lives and societies through education, research and innovation.<br>
-                        Incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.<br>
-                    </div>
+                        <div class="tp-caption sfb text-left"
+                        data-x="600"
+                        data-y="240"
+                        data-speed="800"
+                        data-start="1400"
+                        data-easing="easeInOutCubic">
+                            @headline.Description
+                        </div>
 
-                    <div class="tp-caption sfb text-left"
-                         data-x="600"
-                         data-y="310"
-                         data-speed="800"
-                         data-start="1600"
-                         data-easing="easeInOutCubic">
-                        <a class="btn btn-slider" href="#">Read More</a>
-                    </div>
-                </li>
-
-                <li data-transition="fade" data-slotamount="10" data-masterspeed="1500">
-                    <!--  BACKGROUND IMAGE -->
-                    <img src="img-rev-slider/bg-2.jpg" alt="">
-                    <div class="tp-caption custom-font-1 lft"
-                         data-x="left"
-                         data-y="140"
-                         data-speed="800"
-                         data-start="400"
-                         data-easing="easeInOutCubic"
-                         data-endspeed="300">
-                        Put Your Faith
-                    </div>
-
-                    <div class="tp-caption sfr custom-font-2"
-                         data-x="left"
-                         data-y="190"
-                         data-speed="800"
-                         data-start="800"
-                         data-easing="easeInOutCubic">
-                        Into Action
-                    </div>
-
-                    <div class="tp-caption sfb text-left"
-                         data-x="left"
-                         data-y="240"
-                         data-speed="800"
-                         data-start="1200"
-                         data-easing="easeInOutCubic">
-                        Put your faith into action today and let your actions be fueled by your faith.<br>
-                        Incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.<br>
-                    </div>
-
-                    <div class="tp-caption sfb text-left"
-                         data-x="left"
-                         data-y="310"
-                         data-speed="800"
-                         data-start="1600"
-                         data-easing="easeInOutCubic">
-                        <a class="btn btn-slider" href="#">Read More</a>
-                    </div>
-                </li>
-
-                <li data-transition="fade" data-slotamount="10" data-masterspeed="1500">
-                    <!--  BACKGROUND IMAGE -->
-                    <img src="img-rev-slider/bg-3.jpg" alt="">
-                    <div class="tp-caption border-v lft"
-                         data-x="540"
-                         data-y="center"
-                         data-speed="800"
-                         data-start="400"
-                         data-easing="easeInOutCubic"
-                         data-endspeed="300">
-                    </div>
-
-                    <div class="tp-caption custom-font-1 lft"
-                         data-x="600"
-                         data-y="140"
-                         data-speed="800"
-                         data-start="1000"
-                         data-easing="easeInOutCubic"
-                         data-endspeed="300">
-                        total surrender
-                    </div>
-
-                    <div class="tp-caption lft custom-font-2"
-                         data-x="600"
-                         data-y="190"
-                         data-speed="800"
-                         data-start="800"
-                         data-easing="easeInOutCubic">
-                        to God
-                    </div>
-
-                    <div class="tp-caption sfb text-left"
-                         data-x="600"
-                         data-y="240"
-                         data-speed="800"
-                         data-start="1400"
-                         data-easing="easeInOutCubic">
-                        The first step in overcoming any kind of situation that holds me in bondage in my thoughts,<br>
-                        mind, body and spirit is to surrender it to God<br>
-                    </div>
-
-                    <div class="tp-caption sfb text-left"
-                         data-x="600"
-                         data-y="310"
-                         data-speed="800"
-                         data-start="1600"
-                         data-easing="easeInOutCubic">
-                        <a class="btn btn-slider" href="#">Read More</a>
-                    </div>
-                </li>
+                        <div class="tp-caption sfb text-left"
+                        data-x="600"
+                        data-y="310"
+                        data-speed="800"
+                        data-start="1600"
+                        data-easing="easeInOutCubic">
+                            <a class="btn btn-slider" href="@headline.Url">Read More</a>
+                        </div>
+                    </li>
+                }
             </ul>
         </div>
     </div>
@@ -171,105 +81,26 @@
 
             <div class="three-fourth">
                 <div class="fx custom-carousel-1">
-                    <div class="item">
-                        <div class="overlay">
-                            <span class="time">February 6, 2017</span>
-                            <a href="#">
-                                <h3>Family Baptism Class</h3>
-                            </a>
-                            <span class="desc">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.
-                            </span>
+                    @foreach (var _event in ViewData["Events"] as List<Event>)
+                    {
+                        <div class="item">
+                            <div class="overlay">
+                                <span class="time">@_event.EventDate.ToString("MMMM dd, yyyy")</span>
+                                <a href="#">
+                                    <h3>@_event.Title</h3>
+                                </a>
+                                <span class="desc">
+                                    @_event.Description
+                                </span>
+                            </div>
+                            <img src="@AppSettings.ImageUrl/Events/@_event.EventId/@_event.Picture" alt="">
                         </div>
-                        <img src="img/events/pic%20(1).jpg" alt="">
-                    </div>
-
-                    <div class="item">
-                        <div class="overlay">
-                            <span class="time">February 10, 2017</span>
-                            <a href="#">
-                                <h3>Transforming Live</h3>
-                            </a>
-                            <span class="desc">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.
-                            </span>
-                        </div>
-                        <img src="img/events/pic%20(2).jpg" alt="">
-                    </div>
-
-                    <div class="item">
-                        <div class="overlay">
-                            <span class="time">February 20, 2017</span>
-                            <a href="#">
-                                <h3>Relationship With God</h3>
-                            </a>
-                            <span class="desc">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.
-                            </span>
-                        </div>
-                        <img src="img/events/pic%20(3).jpg" alt="">
-                    </div>
-
-                    <div class="item">
-                        <div class="overlay">
-                            <span class="time">February 26, 2017</span>
-                            <a href="#">
-                                <h3>Abundant Life</h3>
-                            </a>
-                            <span class="desc">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.
-                            </span>
-                        </div>
-                        <img src="img/events/pic%20(4).jpg" alt="">
-                    </div>
-
-                    <div class="item">
-                        <div class="overlay">
-                            <span class="time">March 1, 2017</span>
-                            <a href="#">
-                                <h3>God is Good</h3>
-                            </a>
-                            <span class="desc">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.
-                            </span>
-                        </div>
-                        <img src="img/events/pic%20(5).jpg" alt="">
-                    </div>
-
-                    <div class="item">
-                        <div class="overlay">
-                            <span class="time">March 10, 2017</span>
-                            <a href="#">
-                                <h3>Jehovah Jireh</h3>
-                            </a>
-                            <span class="desc">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.
-                            </span>
-                        </div>
-                        <img src="img/events/pic%20(6).jpg" alt="">
-                    </div>
-
+                    }
                 </div>
             </div>
         </div>
         <div class="clearfix"></div>
 
-    </section>
-    <!-- section close -->
-    <!-- section begin -->
-    <section id="countdown-container" data-speed="5" data-type="background">
-        <div class="container">
-            <div class="row text-center">
-                <div class="col-md-6 wow fadeInLeft">
-                    <h3>Transforming Live, Restoring Hope</h3>
-                    <span class="time">April 10, 2017 8:00 pm</span>
-                </div>
-
-                <div class="col-md-6 wow fadeInRight" data-wow-delay=".25s">
-                    <div id="defaultCountdown"></div>
-                </div>
-            </div>
-        </div>
     </section>
     <!-- section close -->
     <!-- section begin -->
@@ -283,7 +114,7 @@
 
                 <div class="col-md-4 wow fadeInRight" data-wow-delay=".5s">
                     <img src="img/misc/pic-1.jpg" class="img-responsive" alt="">
-                    <h3>The Communities</h3>
+                    <h3>Our Community</h3>
                     Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto.
                     <br>
                     <br>
@@ -291,7 +122,7 @@
                 </div>
                 <div class="col-md-4 wow fadeInRight" data-wow-delay=".75s">
                     <img src="img/misc/pic-2.jpg" class="img-responsive" alt="">
-                    <h3>Our Ministries</h3>
+                    <h3>Church Mission</h3>
                     Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto.
                     <br>
                     <br>
@@ -299,7 +130,7 @@
                 </div>
                 <div class="col-md-4 wow fadeInRight" data-wow-delay="1s">
                     <img src="img/misc/pic-3.jpg" class="img-responsive" alt="">
-                    <h3>Our Faith</h3>
+                    <h3>Participate With Us</h3>
                     Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto.
                     <br>
                     <br>
@@ -317,59 +148,27 @@
                     <h2>Latest Teachings</h2>
                     <div class="divider-double"></div>
                 </div>
-
                 <div class="col-md-10 col-md-offset-1">
-                    <div class="custom-col-3 wow flipInX">
-                        <div class="left-col">
-                            <img src="img/sermons/pic%20(1).jpg" alt="" class="img-responsive">
-                        </div>
-                        <div class="mid-col">
-                            <a href="#">
-                                <h3>Transforming Live, Restoring Hope</h3>
-                            </a>
-                            <div class="details"><span>By <a href="#">John Rook</a>, February 08, 2017</span></div>
-                        </div>
-                        <div class="right-col">
-                            <a href="#"><i class="fa fa-video-camera"></i></a>
-                            <a href="#"><i class="fa fa-volume-up"></i></a>
-                            <a href="#"><i class="fa fa-file-pdf-o"></i></a>
-                        </div>
-                    </div>
 
-                    <div class="custom-col-3 wow flipInX">
-                        <div class="left-col">
-                            <img src="img/sermons/pic%20(2).jpg" alt="" class="img-responsive">
+                    @foreach (var teaching in ViewData["Teachings"] as IEnumerable<Teaching>)
+                    {
+                        <div class="custom-col-3 wow flipInX">
+                            <div class="left-col">
+                                <img src="@AppSettings.ImageUrl/Teachings/@teaching.TeachingId/@teaching.Picture" alt="" class="img-responsive">
+                            </div>
+                            <div class="mid-col">
+                                <a href="#">
+                                    <h3>@teaching.Title</h3>
+                                </a>
+                                <div class="details"><span>By <a href="#">@teaching.Speaker</a>, @teaching.TeachingDate.ToString("MMMM dd, yyyy")</span></div>
+                            </div>
+                            <div class="right-col">
+                                <a href="@teaching.Video" target="_blank"><i class="fa fa-video-camera"></i></a>
+                                <a href="@teaching.Audio" target="_blank"><i class="fa fa-volume-up"></i></a>
+                                <a href="@teaching.PDF" target="_blank"><i class="fa fa-file-pdf-o"></i></a>
+                            </div>
                         </div>
-                        <div class="mid-col">
-                            <a href="#">
-                                <h3>Put Your Faith Into Action</h3>
-                            </a>
-                            <div class="details"><span>By <a href="#">Allan Poe</a>, February 15, 2017</span></div>
-                        </div>
-                        <div class="right-col">
-                            <a href="#"><i class="fa fa-video-camera"></i></a>
-                            <a href="#"><i class="fa fa-volume-up"></i></a>
-                            <a href="#"><i class="fa fa-file-pdf-o"></i></a>
-                        </div>
-                    </div>
-
-
-                    <div class="custom-col-3 wow flipInX">
-                        <div class="left-col">
-                            <img src="img/sermons/pic%20(3).jpg" alt="" class="img-responsive">
-                        </div>
-                        <div class="mid-col">
-                            <a href="#">
-                                <h3>Find And You Shall Seek</h3>
-                            </a>
-                            <div class="details"><span>By <a href="#">Ron Ward</a>, February 22, 2017</span></div>
-                        </div>
-                        <div class="right-col">
-                            <a href="#"><i class="fa fa-video-camera"></i></a>
-                            <a href="#"><i class="fa fa-volume-up"></i></a>
-                            <a href="#"><i class="fa fa-file-pdf-o"></i></a>
-                        </div>
-                    </div>
+                    }
                 </div>
             </div>
         </div>
@@ -395,47 +194,6 @@
 
                 <div class="col-md-6 wow fadeInUp">
                     <img src="img/misc/pic-4.png" class="img-responsive" alt="">
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- section close -->
-    <!-- section begin -->
-    <section id="section-gallery">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2 text-center">
-                    <h2>From Gallery</h2>
-                    <div class="divider-double"></div>
-                </div>
-
-                <div id="gallery-isotope" class="col-md-12 wow fadeInUp" data-wow-delay=".25s">
-                    <div class="item long-pic">
-                        <a href="img/gallery/pic%20(1).jpg" data-gal="prettyPhoto[galllery]"><span class="overlay"></span></a>
-                        <img src="img/gallery/pic%20(1).jpg" alt="">
-                    </div>
-
-                    <div class="item small-pic">
-                        <a href="img/gallery/pic%20(2).jpg" data-gal="prettyPhoto[galllery]"><span class="overlay"></span></a>
-                        <img src="img/gallery/pic%20(2).jpg" alt="">
-                    </div>
-
-                    <div class="item wide-pic">
-                        <a href="img/gallery/pic%20(3).jpg" data-gal="prettyPhoto[galllery]"><span class="overlay"></span></a>
-                        <img src="img/gallery/pic%20(3).jpg" alt="">
-                    </div>
-
-                    <div class="item wide-pic">
-                        <a href="img/gallery/pic%20(4).jpg" data-gal="prettyPhoto[galllery]"><span class="overlay"></span></a>
-                        <img src="img/gallery/pic%20(4).jpg" alt="">
-                    </div>
-
-                    <div class="item small-pic">
-                        <a href="img/gallery/pic%20(5).jpg" data-gal="prettyPhoto[galllery]"><span class="overlay"></span></a>
-                        <img src="img/gallery/pic%20(5).jpg" alt="">
-                    </div>
-
-
                 </div>
             </div>
         </div>

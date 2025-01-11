@@ -1,6 +1,8 @@
+using Web.YFC.Data;
+using Web.YFC.Models;
+using Web.YFC.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Web.YFC.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,9 +12,22 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 	options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
 	.AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<EventServices, EventServices>();
+builder.Services.AddScoped<InspirationServices, InspirationServices>();
+builder.Services.AddScoped<HeadlineServices, HeadlineServices>();
+builder.Services.AddScoped<TeachingServices, TeachingServices>();
+builder.Services.AddScoped<InspirationServices, InspirationServices>();
+builder.Services.AddScoped<UserServices, UserServices>();
+builder.Services.AddScoped<StatementServices, StatementServices>();
+builder.Services.AddScoped<FileUploadServices, FileUploadServices>();
+builder.Services.AddScoped<CommunityServices, CommunityServices>();
+builder.Services.AddScoped<CommunityInfoServices, CommunityInfoServices>();
+builder.Services.AddScoped<MinistryServices, MinistryServices>();
+builder.Services.AddScoped<MinistryInfoServices, MinistryInfoServices>();
 
 var app = builder.Build();
 

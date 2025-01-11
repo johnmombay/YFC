@@ -22,6 +22,58 @@ namespace Api.YFC.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Api.YFC.Models.Community", b =>
+                {
+                    b.Property<int>("CommunityId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CommunityId"));
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CommunityId");
+
+                    b.ToTable("Communities");
+                });
+
+            modelBuilder.Entity("Api.YFC.Models.CommunityInfo", b =>
+                {
+                    b.Property<int>("CommunityInfoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CommunityInfoId"));
+
+                    b.Property<string>("About")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Calendar")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CommunityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Leaders")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("News")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CommunityInfoId");
+
+                    b.HasIndex("CommunityId");
+
+                    b.ToTable("CommunitiesInfos");
+                });
+
             modelBuilder.Entity("Api.YFC.Models.Event", b =>
                 {
                     b.Property<int>("EventId")
@@ -111,6 +163,58 @@ namespace Api.YFC.Migrations
                     b.HasKey("InspirationId");
 
                     b.ToTable("Inspirations");
+                });
+
+            modelBuilder.Entity("Api.YFC.Models.Ministry", b =>
+                {
+                    b.Property<int>("MinistryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MinistryId"));
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MinistryId");
+
+                    b.ToTable("Ministries");
+                });
+
+            modelBuilder.Entity("Api.YFC.Models.MinistryInfo", b =>
+                {
+                    b.Property<int>("MinistryInfoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MinistryInfoId"));
+
+                    b.Property<string>("About")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Calendar")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Leaders")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MinistryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("News")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MinistryInfoId");
+
+                    b.HasIndex("MinistryId");
+
+                    b.ToTable("MinistriesInfos");
                 });
 
             modelBuilder.Entity("Api.YFC.Models.Statement", b =>
@@ -394,6 +498,28 @@ namespace Api.YFC.Migrations
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
+            modelBuilder.Entity("Api.YFC.Models.CommunityInfo", b =>
+                {
+                    b.HasOne("Api.YFC.Models.Community", "Community")
+                        .WithMany("CommunityInfos")
+                        .HasForeignKey("CommunityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Community");
+                });
+
+            modelBuilder.Entity("Api.YFC.Models.MinistryInfo", b =>
+                {
+                    b.HasOne("Api.YFC.Models.Ministry", "Ministry")
+                        .WithMany("MinistryInfos")
+                        .HasForeignKey("MinistryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ministry");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -443,6 +569,16 @@ namespace Api.YFC.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Api.YFC.Models.Community", b =>
+                {
+                    b.Navigation("CommunityInfos");
+                });
+
+            modelBuilder.Entity("Api.YFC.Models.Ministry", b =>
+                {
+                    b.Navigation("MinistryInfos");
                 });
 #pragma warning restore 612, 618
         }

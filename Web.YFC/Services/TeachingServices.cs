@@ -2,7 +2,7 @@
 using Web.YFC.Models;
 using System.Text.Json;
 
-namespace Admin.YFC.Services
+namespace Web.YFC.Services
 {
 	public class TeachingServices
 	{

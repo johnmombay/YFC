@@ -1,6 +1,7 @@
 ﻿using Admin.YFC.Common;
 using Admin.YFC.Models;
 using Admin.YFC.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
 namespace Admin.YFC.Services
@@ -104,6 +105,18 @@ namespace Admin.YFC.Services
 				applicationUser = JsonSerializer.Deserialize<ApplicationUser>(result, AppSettings.options)!;
 			}
 			return applicationUser;
+		}
+
+		public async Task<bool> ResetPassword(ResetPasswordViewModel resetPasswordViewModel)
+		{
+			var data = JsonSerializer.Serialize(resetPasswordViewModel).ToString();
+			var result = await RestCall.Post(AppSettings.ApiUri + EndPoints.UserEndpoint + "/ResetPassword/", data);
+			if (!string.IsNullOrWhiteSpace(result))
+			{
+				return true;
+			}
+			return false;
+
 		}
 	}
 }

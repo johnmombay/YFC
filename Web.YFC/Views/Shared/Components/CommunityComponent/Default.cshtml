@@ -1,0 +1,8 @@
+﻿@model List<Web.YFC.Models.Community>
+
+<ul>
+    @foreach (var community in Model)
+    {
+        <li><a asp-action="Index" asp-controller="Communities" asp-route-id="@community.CommunityId">@community.Name</a></li>
+    }
+</ul>

@@ -17,5 +17,9 @@ namespace Api.YFC.Data
 		public DbSet<Inspiration> Inspirations { get; set; }
 		public DbSet<Statement> Statements { get; set; }
 		public DbSet<Teaching> Teachings { get; set; }
+		public DbSet<Community> Communities { get; set; }
+		public DbSet<Ministry> Ministries { get; set; }
+		public DbSet<CommunityInfo> CommunitiesInfos { get; set; }
+		public DbSet<MinistryInfo> MinistriesInfos { get; set; }
 	}
 }

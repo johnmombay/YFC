@@ -1,8 +1,8 @@
-﻿using System.Text.Json;
-using Web.YFC.Common;
+﻿using Web.YFC.Common;
 using Web.YFC.Models;
+using System.Text.Json;
 
-namespace Admin.YFC.Services
+namespace Web.YFC.Services
 {
 	public class EventServices
 	{
