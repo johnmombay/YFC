@@ -14,12 +14,13 @@ namespace Admin.YFC.Data
 		public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 		public DbSet<Event> Events { get; set; }
 		public DbSet<Headline> Headlines { get; set; }
-		public DbSet<Inspiration> Inspirations { get; set; }
-		public DbSet<Statement> Statements { get; set; }
 		public DbSet<Teaching> Teachings { get; set; }
 		public DbSet<Community> Communities { get; set; }
 		public DbSet<Ministry> Ministries { get; set; }
-		public DbSet<CommunityInfo> CommunitiesInfos { get; set; }
-		public DbSet<MinistryInfo> MinistriesInfos { get; set; }
+		public DbSet<Church> Churches { get; set; }
+		public DbSet<PastorMessage> PastorMessages { get; set; }
+		public DbSet<Pastor> Pastors { get; set; }
+		public DbSet<Section> Sections { get; set; }
+		public DbSet<Content> Contents { get; set; }
 	}
 }

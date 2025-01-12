@@ -12,47 +12,47 @@ namespace Api.YFC.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class InspirationsController : ControllerBase
+    public class PastorsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public InspirationsController(ApplicationDbContext context)
+        public PastorsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Inspirations
+        // GET: api/Pastors
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Inspiration>>> GetInspirations()
+        public async Task<ActionResult<IEnumerable<Pastor>>> GetPastors()
         {
-            return await _context.Inspirations.ToListAsync();
+            return await _context.Pastors.ToListAsync();
         }
 
-        // GET: api/Inspirations/5
+        // GET: api/Pastors/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Inspiration>> GetInspiration(int id)
+        public async Task<ActionResult<Pastor>> GetPastor(int id)
         {
-            var inspiration = await _context.Inspirations.FindAsync(id);
+            var pastor = await _context.Pastors.FindAsync(id);
 
-            if (inspiration == null)
+            if (pastor == null)
             {
                 return NotFound();
             }
 
-            return inspiration;
+            return pastor;
         }
 
-        // PUT: api/Inspirations/5
+        // PUT: api/Pastors/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutInspiration(int id, Inspiration inspiration)
+        public async Task<IActionResult> PutPastor(int id, Pastor pastor)
         {
-            if (id != inspiration.InspirationId)
+            if (id != pastor.PastorId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(inspiration).State = EntityState.Modified;
+            _context.Entry(pastor).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace Api.YFC.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!InspirationExists(id))
+                if (!PastorExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +73,36 @@ namespace Api.YFC.Controllers
             return NoContent();
         }
 
-        // POST: api/Inspirations
+        // POST: api/Pastors
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Inspiration>> PostInspiration(Inspiration inspiration)
+        public async Task<ActionResult<Pastor>> PostPastor(Pastor pastor)
         {
-            _context.Inspirations.Add(inspiration);
+            _context.Pastors.Add(pastor);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetInspiration", new { id = inspiration.InspirationId }, inspiration);
+            return CreatedAtAction("GetPastor", new { id = pastor.PastorId }, pastor);
         }
 
-        // DELETE: api/Inspirations/5
+        // DELETE: api/Pastors/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteInspiration(int id)
+        public async Task<IActionResult> DeletePastor(int id)
         {
-            var inspiration = await _context.Inspirations.FindAsync(id);
-            if (inspiration == null)
+            var pastor = await _context.Pastors.FindAsync(id);
+            if (pastor == null)
             {
                 return NotFound();
             }
 
-            _context.Inspirations.Remove(inspiration);
+            _context.Pastors.Remove(pastor);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool InspirationExists(int id)
+        private bool PastorExists(int id)
         {
-            return _context.Inspirations.Any(e => e.InspirationId == id);
+            return _context.Pastors.Any(e => e.PastorId == id);
         }
     }
 }

@@ -37,13 +37,9 @@ namespace Admin.YFC.Common
 		public static string UserEndpoint = "/Users";
 		public static string EventEndpoint = "/Events";
 		public static string HeadlineEndpoint = "/Headlines";
-		public static string InspirationEndpoint = "/Inspirations";
-		public static string StatementEndpoint = "/Statements";
 		public static string TeachingEndpoint = "/Teachings";
 		public static string FileUploadEndpoint = "/FileUpload";
 		public static string CommunityEndpoint = "/Communities";
-		public static string CommunityInfoEndpoint = "/CommunityInfos";
 		public static string MinistryEndpoint = "/Ministries";
-		public static string MinistryInfoEndpoint = "/MinistryInfos";
 	}
 }

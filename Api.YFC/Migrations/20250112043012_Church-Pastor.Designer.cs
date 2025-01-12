@@ -4,6 +4,7 @@ using Api.YFC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api.YFC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250112043012_Church-Pastor")]
+    partial class ChurchPastor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,28 +72,6 @@ namespace Api.YFC.Migrations
                     b.HasKey("CommunityId");
 
                     b.ToTable("Communities");
-                });
-
-            modelBuilder.Entity("Api.YFC.Models.Content", b =>
-                {
-                    b.Property<int>("ContentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ContentId"));
-
-                    b.Property<string>("Material")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SectionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ContentId");
-
-                    b.HasIndex("SectionId");
-
-                    b.ToTable("Contents");
                 });
 
             modelBuilder.Entity("Api.YFC.Models.Event", b =>
@@ -159,6 +140,31 @@ namespace Api.YFC.Migrations
                     b.ToTable("Headlines");
                 });
 
+            modelBuilder.Entity("Api.YFC.Models.Inspiration", b =>
+                {
+                    b.Property<int>("InspirationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InspirationId"));
+
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("InspirationId");
+
+                    b.ToTable("Inspirations");
+                });
+
             modelBuilder.Entity("Api.YFC.Models.Ministry", b =>
                 {
                     b.Property<int>("MinistryId")
@@ -212,8 +218,9 @@ namespace Api.YFC.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PastorId")
-                        .HasColumnType("int");
+                    b.Property<string>("Pastor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -221,26 +228,28 @@ namespace Api.YFC.Migrations
 
                     b.HasKey("PastorMessageId");
 
-                    b.HasIndex("PastorId");
-
                     b.ToTable("PastorMessages");
                 });
 
-            modelBuilder.Entity("Api.YFC.Models.Section", b =>
+            modelBuilder.Entity("Api.YFC.Models.Statement", b =>
                 {
-                    b.Property<int>("SectionId")
+                    b.Property<int>("StatementId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SectionId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StatementId"));
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Author")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("SectionId");
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("Sections");
+                    b.HasKey("StatementId");
+
+                    b.ToTable("Statements");
                 });
 
             modelBuilder.Entity("Api.YFC.Models.Teaching", b =>
@@ -501,28 +510,6 @@ namespace Api.YFC.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
-                });
-
-            modelBuilder.Entity("Api.YFC.Models.Content", b =>
-                {
-                    b.HasOne("Api.YFC.Models.Section", "Section")
-                        .WithMany()
-                        .HasForeignKey("SectionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Section");
-                });
-
-            modelBuilder.Entity("Api.YFC.Models.PastorMessage", b =>
-                {
-                    b.HasOne("Api.YFC.Models.Pastor", "Pastor")
-                        .WithMany()
-                        .HasForeignKey("PastorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Pastor");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -12,19 +12,16 @@ namespace Web.YFC.Controllers
 		private readonly HeadlineServices _headlineServices;
 		private readonly TeachingServices _teachingServices;
 		private readonly EventServices _eventServices;
-		private readonly StatementServices _statementServices;
 
 		public HomeController(ILogger<HomeController> logger,
 			HeadlineServices headlineServices,
 			TeachingServices teachingServices,
-			EventServices eventServices,
-			StatementServices statementServices)
+			EventServices eventServices)
 		{
 			_logger = logger;
 			_headlineServices = headlineServices;
 			_teachingServices = teachingServices;
 			_eventServices = eventServices;
-			_statementServices = statementServices;
 		}
 
 		public async Task<IActionResult> Index()
@@ -33,7 +30,6 @@ namespace Web.YFC.Controllers
 			ViewData["Headlines"] = await _headlineServices.GetHeadlines();
 			ViewData["Teachings"] = await _teachingServices.GetTeachings();
 			ViewData["Events"] = await _eventServices.GetEvents();
-			ViewData["Statements"] = await _statementServices.GetStatements();
 
 			return View();
 		}

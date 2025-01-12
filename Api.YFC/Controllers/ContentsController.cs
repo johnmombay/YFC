@@ -12,47 +12,47 @@ namespace Api.YFC.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StatementsController : ControllerBase
+    public class ContentsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public StatementsController(ApplicationDbContext context)
+        public ContentsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Statements
+        // GET: api/Contents
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Statement>>> GetStatements()
+        public async Task<ActionResult<IEnumerable<Content>>> GetContents()
         {
-            return await _context.Statements.ToListAsync();
+            return await _context.Contents.ToListAsync();
         }
 
-        // GET: api/Statements/5
+        // GET: api/Contents/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Statement>> GetStatement(int id)
+        public async Task<ActionResult<Content>> GetContent(int id)
         {
-            var statement = await _context.Statements.FindAsync(id);
+            var content = await _context.Contents.FindAsync(id);
 
-            if (statement == null)
+            if (content == null)
             {
                 return NotFound();
             }
 
-            return statement;
+            return content;
         }
 
-        // PUT: api/Statements/5
+        // PUT: api/Contents/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutStatement(int id, Statement statement)
+        public async Task<IActionResult> PutContent(int id, Content content)
         {
-            if (id != statement.StatementId)
+            if (id != content.ContentId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(statement).State = EntityState.Modified;
+            _context.Entry(content).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace Api.YFC.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!StatementExists(id))
+                if (!ContentExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +73,36 @@ namespace Api.YFC.Controllers
             return NoContent();
         }
 
-        // POST: api/Statements
+        // POST: api/Contents
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Statement>> PostStatement(Statement statement)
+        public async Task<ActionResult<Content>> PostContent(Content content)
         {
-            _context.Statements.Add(statement);
+            _context.Contents.Add(content);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetStatement", new { id = statement.StatementId }, statement);
+            return CreatedAtAction("GetContent", new { id = content.ContentId }, content);
         }
 
-        // DELETE: api/Statements/5
+        // DELETE: api/Contents/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteStatement(int id)
+        public async Task<IActionResult> DeleteContent(int id)
         {
-            var statement = await _context.Statements.FindAsync(id);
-            if (statement == null)
+            var content = await _context.Contents.FindAsync(id);
+            if (content == null)
             {
                 return NotFound();
             }
 
-            _context.Statements.Remove(statement);
+            _context.Contents.Remove(content);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool StatementExists(int id)
+        private bool ContentExists(int id)
         {
-            return _context.Statements.Any(e => e.StatementId == id);
+            return _context.Contents.Any(e => e.ContentId == id);
         }
     }
 }

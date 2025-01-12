@@ -17,17 +17,12 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<EventServices, EventServices>();
-builder.Services.AddScoped<InspirationServices, InspirationServices>();
 builder.Services.AddScoped<HeadlineServices, HeadlineServices>();
 builder.Services.AddScoped<TeachingServices, TeachingServices>();
-builder.Services.AddScoped<InspirationServices,InspirationServices>();
 builder.Services.AddScoped<UserServices, UserServices>();
-builder.Services.AddScoped<StatementServices, StatementServices>();
 builder.Services.AddScoped<FileUploadServices, FileUploadServices>();
 builder.Services.AddScoped<CommunityServices, CommunityServices>();
-builder.Services.AddScoped<CommunityInfoServices, CommunityInfoServices>();
 builder.Services.AddScoped<MinistryServices, MinistryServices>();
-builder.Services.AddScoped<MinistryInfoServices, MinistryInfoServices>();
 
 var app = builder.Build();
 

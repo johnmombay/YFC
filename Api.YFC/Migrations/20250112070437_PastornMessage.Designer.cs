@@ -4,6 +4,7 @@ using Api.YFC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api.YFC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250112070437_PastornMessage")]
+    partial class PastornMessage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -159,6 +162,31 @@ namespace Api.YFC.Migrations
                     b.ToTable("Headlines");
                 });
 
+            modelBuilder.Entity("Api.YFC.Models.Inspiration", b =>
+                {
+                    b.Property<int>("InspirationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InspirationId"));
+
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("InspirationId");
+
+                    b.ToTable("Inspirations");
+                });
+
             modelBuilder.Entity("Api.YFC.Models.Ministry", b =>
                 {
                     b.Property<int>("MinistryId")
@@ -241,6 +269,27 @@ namespace Api.YFC.Migrations
                     b.HasKey("SectionId");
 
                     b.ToTable("Sections");
+                });
+
+            modelBuilder.Entity("Api.YFC.Models.Statement", b =>
+                {
+                    b.Property<int>("StatementId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StatementId"));
+
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("StatementId");
+
+                    b.ToTable("Statements");
                 });
 
             modelBuilder.Entity("Api.YFC.Models.Teaching", b =>
