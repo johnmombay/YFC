@@ -41,5 +41,10 @@ namespace Admin.YFC.Common
 		public static string FileUploadEndpoint = "/FileUpload";
 		public static string CommunityEndpoint = "/Communities";
 		public static string MinistryEndpoint = "/Ministries";
+		public static string ChurchEndpoint = "/Churches";
+		public static string PastorEndpoint = "/Pastors";
+		public static string PastorMessageEndpoint = "/PastorMessages";
+		public static string SectionEndpoint = "/Sections";
+		public static string ContentEndpoint = "/Contents";
 	}
 }
