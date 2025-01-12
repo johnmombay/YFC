@@ -1,7 +1,6 @@
 using Admin.YFC.Data;
 using Admin.YFC.Models;
 using Admin.YFC.Services;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +22,11 @@ builder.Services.AddScoped<UserServices, UserServices>();
 builder.Services.AddScoped<FileUploadServices, FileUploadServices>();
 builder.Services.AddScoped<CommunityServices, CommunityServices>();
 builder.Services.AddScoped<MinistryServices, MinistryServices>();
+builder.Services.AddScoped<ContentServices, ContentServices>();
+builder.Services.AddScoped<ChurchServices, ChurchServices>();
+builder.Services.AddScoped<PastorServices, PastorServices>();
+builder.Services.AddScoped<SectionServices, SectionServices>();
+builder.Services.AddScoped<PastorMessageServices, PastorMessageServices>();
 
 var app = builder.Build();
 

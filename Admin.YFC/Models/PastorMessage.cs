@@ -6,6 +6,6 @@
 		public string Title { get; set; } = default!;
 		public string Message { get; set; } = default!;
 		public int PastorId { get; set; }
-		public Pastor Pastor { get; set; } = default!;
+		public Pastor? Pastor { get; set; }
 	}
 }

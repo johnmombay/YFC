@@ -15,12 +15,4 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Churches\" />
-    <Folder Include="Views\Contents\" />
-    <Folder Include="Views\Sections\" />
-    <Folder Include="Views\PastorMessages\" />
-    <Folder Include="Views\Pastors\" />
-  </ItemGroup>
-
 </Project>

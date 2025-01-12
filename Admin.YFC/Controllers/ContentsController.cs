@@ -1,16 +1,20 @@
 ﻿using Admin.YFC.Models;
 using Admin.YFC.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Admin.YFC.Controllers
 {
 	public class ContentsController : Controller
 	{
 		private readonly ContentServices _contentServices;
+		private readonly SectionServices _sectionServices;
 
-		public ContentsController(ContentServices contentServices)
+		public ContentsController(ContentServices contentServices,
+			SectionServices sectionServices)
 		{
 			_contentServices = contentServices;
+			_sectionServices = sectionServices;
 		}
 		public IActionResult Index()
 		{
@@ -23,8 +27,10 @@ namespace Admin.YFC.Controllers
 			return Json(new { data = contents });
 		}
 
-		public IActionResult Create()
+		public async Task<IActionResult> Create()
 		{
+			var sections = await _sectionServices.GetSections();
+			ViewBag.Sections = new SelectList(sections, "SectionId", "Name");
 			return View();
 		}
 
@@ -36,12 +42,15 @@ namespace Admin.YFC.Controllers
 			{
 				return RedirectToAction("Index");
 			}
+
 			return View(content);
 		}
 
 		public async Task<IActionResult> Edit(int id)
 		{
 			var content = await _contentServices.GetContentById(id);
+			var sections = await _sectionServices.GetSections();
+			ViewBag.Sections = new SelectList(sections, "SectionId", "Name",content.SectionId);
 			return View(content);
 		}
 
@@ -59,6 +68,8 @@ namespace Admin.YFC.Controllers
 		public async Task<IActionResult> Remove(int id)
 		{
 			var content = await _contentServices.GetContentById(id);
+			var sections = await _sectionServices.GetSections();
+			ViewBag.Sections = new SelectList(sections, "SectionId", "Name", content.SectionId);
 			return View(content);
 		}
 

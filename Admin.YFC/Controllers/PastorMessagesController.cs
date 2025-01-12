@@ -1,16 +1,20 @@
 ﻿using Admin.YFC.Models;
 using Admin.YFC.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Admin.YFC.Controllers
 {
 	public class PastorMessagesController : Controller
 	{
 		private readonly PastorMessageServices _pastorMessageServices;
+		private readonly PastorServices _pastorServices;
 
-		public PastorMessagesController(PastorMessageServices pastorMessageServices)
+		public PastorMessagesController(PastorMessageServices pastorMessageServices,
+			PastorServices pastorServices)
 		{
 			_pastorMessageServices = pastorMessageServices;
+			_pastorServices = pastorServices;
 		}
 
 		public IActionResult Index()
@@ -24,8 +28,10 @@ namespace Admin.YFC.Controllers
 			return Json(new { data = pastorMessages });
 		}
 
-		public IActionResult Create()
+		public async Task<IActionResult> Create()
 		{
+			var pastors = await _pastorServices.GetPastors();
+			ViewBag.Pastors = new SelectList(pastors, "PastorId", "Name");
 			return View();
 		}
 
@@ -43,6 +49,8 @@ namespace Admin.YFC.Controllers
 		public async Task<IActionResult> Edit(int id)
 		{
 			var pastorMessage = await _pastorMessageServices.GetPastorMessageById(id);
+			var pastors = await _pastorServices.GetPastors();
+			ViewBag.Pastors = new SelectList(pastors, "PastorId", "Name", pastorMessage.PastorId);
 			return View(pastorMessage);
 		}
 
@@ -60,6 +68,8 @@ namespace Admin.YFC.Controllers
 		public async Task<IActionResult> Remove(int id)
 		{
 			var pastorMessage = await _pastorMessageServices.GetPastorMessageById(id);
+			var pastors = await _pastorServices.GetPastors();
+			ViewBag.Pastors = new SelectList(pastors, "PastorId", "Name", pastorMessage.PastorId);
 			return View(pastorMessage);
 		}
 

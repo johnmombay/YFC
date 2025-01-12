@@ -48,7 +48,7 @@ namespace Api.YFC.Migrations
 
                     b.HasKey("ChurchId");
 
-                    b.ToTable("Churches");
+                    b.ToTable("Churches", (string)null);
                 });
 
             modelBuilder.Entity("Api.YFC.Models.Community", b =>
@@ -68,7 +68,7 @@ namespace Api.YFC.Migrations
 
                     b.HasKey("CommunityId");
 
-                    b.ToTable("Communities");
+                    b.ToTable("Communities", (string)null);
                 });
 
             modelBuilder.Entity("Api.YFC.Models.Content", b =>
@@ -90,7 +90,7 @@ namespace Api.YFC.Migrations
 
                     b.HasIndex("SectionId");
 
-                    b.ToTable("Contents");
+                    b.ToTable("Contents", (string)null);
                 });
 
             modelBuilder.Entity("Api.YFC.Models.Event", b =>
@@ -121,7 +121,7 @@ namespace Api.YFC.Migrations
 
                     b.HasKey("EventId");
 
-                    b.ToTable("Events");
+                    b.ToTable("Events", (string)null);
                 });
 
             modelBuilder.Entity("Api.YFC.Models.Headline", b =>
@@ -156,7 +156,7 @@ namespace Api.YFC.Migrations
 
                     b.HasKey("HeadlineId");
 
-                    b.ToTable("Headlines");
+                    b.ToTable("Headlines", (string)null);
                 });
 
             modelBuilder.Entity("Api.YFC.Models.Ministry", b =>
@@ -176,7 +176,7 @@ namespace Api.YFC.Migrations
 
                     b.HasKey("MinistryId");
 
-                    b.ToTable("Ministries");
+                    b.ToTable("Ministries", (string)null);
                 });
 
             modelBuilder.Entity("Api.YFC.Models.Pastor", b =>
@@ -197,7 +197,7 @@ namespace Api.YFC.Migrations
 
                     b.HasKey("PastorId");
 
-                    b.ToTable("Pastors");
+                    b.ToTable("Pastors", (string)null);
                 });
 
             modelBuilder.Entity("Api.YFC.Models.PastorMessage", b =>
@@ -223,7 +223,7 @@ namespace Api.YFC.Migrations
 
                     b.HasIndex("PastorId");
 
-                    b.ToTable("PastorMessages");
+                    b.ToTable("PastorMessages", (string)null);
                 });
 
             modelBuilder.Entity("Api.YFC.Models.Section", b =>
@@ -240,7 +240,7 @@ namespace Api.YFC.Migrations
 
                     b.HasKey("SectionId");
 
-                    b.ToTable("Sections");
+                    b.ToTable("Sections", (string)null);
                 });
 
             modelBuilder.Entity("Api.YFC.Models.Teaching", b =>
@@ -278,7 +278,7 @@ namespace Api.YFC.Migrations
 
                     b.HasKey("TeachingId");
 
-                    b.ToTable("Teachings");
+                    b.ToTable("Teachings", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

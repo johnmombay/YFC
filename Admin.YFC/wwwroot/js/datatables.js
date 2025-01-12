@@ -1,35 +1,4 @@
 ﻿$(document).ready(function () {
-    $('#statements').DataTable({
-        "ajax": "Statements/GetStatements",
-        "columns": [
-            { "data": "message" },
-            { "data": "author" },
-            {
-                "render": function (data, type, row) {
-                    return "<a href='Statements/Edit/" + row.statementId + "'; class='btn btn-dark btn-sm'>Update</a><a href = 'Statements/Remove/" + row.statementId + "'; class='btn btn-danger btn-sm' > Delete</a >";
-                }
-            }
-        ]
-    });
-});
-
-$(document).ready(function () {
-    $('#inspirations').DataTable({
-        "ajax": "Inspirations/GetInspirations",
-        "columns": [
-            { "data": "title" },
-            { "data": "message" },
-            { "data": "author" },
-            {
-                "render": function (data, type, row) {
-                    return "<a href='Inspirations/Edit/" + row.inspirationId + "'; class='btn btn-dark btn-sm'>Update</a><a href = 'Inspirations/Remove/" + row.inspirationId + "'; class='btn btn-danger btn-sm' > Delete</a >";
-                }
-            }
-        ]
-    });
-});
-
-$(document).ready(function () {
     $('#events').DataTable({
         "ajax": "Events/GetEvents",
         "columns": [
@@ -126,13 +95,13 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    $('#ministryInfos').DataTable({
-        "ajax": "MinistryInfos/GetMinistryInfos",
+    $('#contents').DataTable({
+        "ajax": "Contents/GetContents",
         "columns": [
-            { "data": "ministryId" },
+            { "data": "sectionId" },
             {
                 "render": function (data, type, row) {
-                    return "<a href='MinistryInfos/Edit/" + row.ministryInfoId + "'; class='btn btn-dark btn-sm'>Update</a><a href = 'MinistryInfos/Remove/" + row.ministryInfoId + "'; class='btn btn-danger btn-sm' > Delete</a >";
+                    return "<a href='Contents/Edit/" + row.contentId + "'; class='btn btn-dark btn-sm'>Update</a><a href = 'Contents/Remove/" + row.contentId + "'; class='btn btn-danger btn-sm' > Delete</a >";
                 }
             }
         ]
@@ -140,13 +109,58 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    $('#communityInfos').DataTable({
-        "ajax": "CommunityInfos/GetCommunityInfos",
+    $('#churches').DataTable({
+        "ajax": "Churches/GetChurches",
         "columns": [
-            { "data": "communityId" },
+            { "data": "title" },
+            { "data": "description" },
+            { "data": "url" },
             {
                 "render": function (data, type, row) {
-                    return "<a href='CommunityInfos/Edit/" + row.communityInfoId + "'; class='btn btn-dark btn-sm'>Update</a><a href = 'CommunityInfos/Remove/" + row.communityInfoId + "'; class='btn btn-danger btn-sm' > Delete</a >";
+                    return "<a href='Churches/Edit/" + row.churchId + "'; class='btn btn-dark btn-sm'>Update</a><a href = 'Churches/Remove/" + row.churchId + "'; class='btn btn-danger btn-sm' > Delete</a >";
+                }
+            }
+        ]
+    });
+});
+
+$(document).ready(function () {
+    $('#pastors').DataTable({
+        "ajax": "Pastors/GetPastors",
+        "columns": [
+            { "data": "name" },
+            {
+                "render": function (data, type, row) {
+                    return "<a href='Pastors/Edit/" + row.pastorId + "'; class='btn btn-dark btn-sm'>Update</a><a href = 'Pastors/Remove/" + row.pastorId + "'; class='btn btn-danger btn-sm' > Delete</a >";
+                }
+            }
+        ]
+    });
+});
+
+$(document).ready(function () {
+    $('#sections').DataTable({
+        "ajax": "Sections/GetSections",
+        "columns": [
+            { "data": "name" },
+            {
+                "render": function (data, type, row) {
+                    return "<a href='Sections/Edit/" + row.sectionId + "'; class='btn btn-dark btn-sm'>Update</a><a href = 'Sections/Remove/" + row.sectionId + "'; class='btn btn-danger btn-sm' > Delete</a >";
+                }
+            }
+        ]
+    });
+});
+
+$(document).ready(function () {
+    $('#pastorMessages').DataTable({
+        "ajax": "PastorMessages/GetPastorMessages",
+        "columns": [
+            { "data": "title" },
+            { "data": "pastorId" },
+            {
+                "render": function (data, type, row) {
+                    return "<a href='PastorMessages/Edit/" + row.pastorMessageId + "'; class='btn btn-dark btn-sm'>Update</a><a href = 'PastorMessages/Remove/" + row.pastorMessageId + "'; class='btn btn-danger btn-sm' > Delete</a >";
                 }
             }
         ]
