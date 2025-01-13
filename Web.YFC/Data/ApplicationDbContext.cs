@@ -22,5 +22,6 @@ namespace Web.YFC.Data
 		public DbSet<Pastor> Pastors { get; set; }
 		public DbSet<Section> Sections { get; set; }
 		public DbSet<Content> Contents { get; set; }
+		public DbSet<Testimonial> Testimonials { get; set; }
 	}
 }

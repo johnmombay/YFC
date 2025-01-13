@@ -47,5 +47,6 @@ namespace Web.YFC.Common
 		public static string PastorMessageEndpoint = "/PastorMessages";
 		public static string SectionEndpoint = "/Sections";
 		public static string ContentEndpoint = "/Contents";
+		public static string TestimonialEndpoint = "/Testimonials";
 	}
 }

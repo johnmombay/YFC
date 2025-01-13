@@ -27,6 +27,7 @@ builder.Services.AddScoped<ChurchServices, ChurchServices>();
 builder.Services.AddScoped<PastorServices, PastorServices>();
 builder.Services.AddScoped<SectionServices, SectionServices>();
 builder.Services.AddScoped<PastorMessageServices, PastorMessageServices>();
+builder.Services.AddScoped<TestimonialServices, TestimonialServices>();
 
 var app = builder.Build();
 

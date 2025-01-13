@@ -21,6 +21,17 @@ namespace Api.YFC.Data
 		public DbSet<PastorMessage> PastorMessages { get; set; }
 		public DbSet<Pastor> Pastors { get; set; }
 		public DbSet<Section> Sections { get; set; }
-		public DbSet<Content> Contents { get; set; }		
+		public DbSet<Content> Contents { get; set; }
+		public DbSet<Testimonial> Testimonials { get; set; }
+		public DbSet<CommunityInfo> CommunityInfos { get; set; }
+		public DbSet<MinistryInfo> MinistryInfos { get; set; }
+		public DbSet<MinistryArticle> MinistryArticles { get; set; }
+		public DbSet<CommunityArticle> CommunityArticles { get; set; }
+		public DbSet<CommunityLeader> CommunityLeaders { get; set; }
+		public DbSet<MinistryLeader> MinistryLeaders { get; set; }
+		public DbSet<CommunitySchedule> CommunitySchedules { get; set; }
+		public DbSet<MinistrySchedule> MinistrySchedules { get; set; }
+		public DbSet<CommunityEvent> CommunityEvents { get; set; }
+		public DbSet<MinistryEvent> MinistryEvents { get; set; }
 	}
 }

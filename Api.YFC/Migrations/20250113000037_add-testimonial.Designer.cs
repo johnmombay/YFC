@@ -4,6 +4,7 @@ using Api.YFC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api.YFC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250113000037_add-testimonial")]
+    partial class addtestimonial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,144 +72,6 @@ namespace Api.YFC.Migrations
                     b.HasKey("CommunityId");
 
                     b.ToTable("Communities");
-                });
-
-            modelBuilder.Entity("Api.YFC.Models.CommunityArticle", b =>
-                {
-                    b.Property<int>("CommunityArticleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CommunityArticleId"));
-
-                    b.Property<int>("CommunityId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CommunityArticleId");
-
-                    b.HasIndex("CommunityId");
-
-                    b.ToTable("CommunityArticles");
-                });
-
-            modelBuilder.Entity("Api.YFC.Models.CommunityEvent", b =>
-                {
-                    b.Property<int>("CommunityEventId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CommunityEventId"));
-
-                    b.Property<int>("CommunityId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("EventDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Picture")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CommunityEventId");
-
-                    b.HasIndex("CommunityId");
-
-                    b.ToTable("CommunityEvents");
-                });
-
-            modelBuilder.Entity("Api.YFC.Models.CommunityInfo", b =>
-                {
-                    b.Property<int>("CommunityInfoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CommunityInfoId"));
-
-                    b.Property<int>("CommunityId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CommunityInfoId");
-
-                    b.HasIndex("CommunityId");
-
-                    b.ToTable("CommunityInfos");
-                });
-
-            modelBuilder.Entity("Api.YFC.Models.CommunityLeader", b =>
-                {
-                    b.Property<int>("CommunityLeaderId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CommunityLeaderId"));
-
-                    b.Property<int>("CommunityId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CommunityLeaderId");
-
-                    b.HasIndex("CommunityId");
-
-                    b.ToTable("CommunityLeaders");
-                });
-
-            modelBuilder.Entity("Api.YFC.Models.CommunitySchedule", b =>
-                {
-                    b.Property<int>("CommunityScheduleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CommunityScheduleId"));
-
-                    b.Property<int>("CommunityId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Day")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Time")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CommunityScheduleId");
-
-                    b.HasIndex("CommunityId");
-
-                    b.ToTable("CommunitySchedules");
                 });
 
             modelBuilder.Entity("Api.YFC.Models.Content", b =>
@@ -315,144 +180,6 @@ namespace Api.YFC.Migrations
                     b.HasKey("MinistryId");
 
                     b.ToTable("Ministries");
-                });
-
-            modelBuilder.Entity("Api.YFC.Models.MinistryArticle", b =>
-                {
-                    b.Property<int>("MinistryArticleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MinistryArticleId"));
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MinistryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("MinistryArticleId");
-
-                    b.HasIndex("MinistryId");
-
-                    b.ToTable("MinistryArticles");
-                });
-
-            modelBuilder.Entity("Api.YFC.Models.MinistryEvent", b =>
-                {
-                    b.Property<int>("MinistryEventId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MinistryEventId"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("EventDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("MinistryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Picture")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("MinistryEventId");
-
-                    b.HasIndex("MinistryId");
-
-                    b.ToTable("MinistryEvents");
-                });
-
-            modelBuilder.Entity("Api.YFC.Models.MinistryInfo", b =>
-                {
-                    b.Property<int>("MinistryInfoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MinistryInfoId"));
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MinistryId")
-                        .HasColumnType("int");
-
-                    b.HasKey("MinistryInfoId");
-
-                    b.HasIndex("MinistryId");
-
-                    b.ToTable("MinistryInfos");
-                });
-
-            modelBuilder.Entity("Api.YFC.Models.MinistryLeader", b =>
-                {
-                    b.Property<int>("MinistryLeaderId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MinistryLeaderId"));
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MinistryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("MinistryLeaderId");
-
-                    b.HasIndex("MinistryId");
-
-                    b.ToTable("MinistryLeaders");
-                });
-
-            modelBuilder.Entity("Api.YFC.Models.MinistrySchedule", b =>
-                {
-                    b.Property<int>("MinistryScheduleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MinistryScheduleId"));
-
-                    b.Property<string>("Day")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MinistryId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Time")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("MinistryScheduleId");
-
-                    b.HasIndex("MinistryId");
-
-                    b.ToTable("MinistrySchedules");
                 });
 
             modelBuilder.Entity("Api.YFC.Models.Pastor", b =>
@@ -800,61 +527,6 @@ namespace Api.YFC.Migrations
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
-            modelBuilder.Entity("Api.YFC.Models.CommunityArticle", b =>
-                {
-                    b.HasOne("Api.YFC.Models.Community", "Community")
-                        .WithMany()
-                        .HasForeignKey("CommunityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Community");
-                });
-
-            modelBuilder.Entity("Api.YFC.Models.CommunityEvent", b =>
-                {
-                    b.HasOne("Api.YFC.Models.Community", "Community")
-                        .WithMany()
-                        .HasForeignKey("CommunityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Community");
-                });
-
-            modelBuilder.Entity("Api.YFC.Models.CommunityInfo", b =>
-                {
-                    b.HasOne("Api.YFC.Models.Community", "Community")
-                        .WithMany()
-                        .HasForeignKey("CommunityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Community");
-                });
-
-            modelBuilder.Entity("Api.YFC.Models.CommunityLeader", b =>
-                {
-                    b.HasOne("Api.YFC.Models.Community", "Community")
-                        .WithMany()
-                        .HasForeignKey("CommunityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Community");
-                });
-
-            modelBuilder.Entity("Api.YFC.Models.CommunitySchedule", b =>
-                {
-                    b.HasOne("Api.YFC.Models.Community", "Community")
-                        .WithMany()
-                        .HasForeignKey("CommunityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Community");
-                });
-
             modelBuilder.Entity("Api.YFC.Models.Content", b =>
                 {
                     b.HasOne("Api.YFC.Models.Section", "Section")
@@ -864,61 +536,6 @@ namespace Api.YFC.Migrations
                         .IsRequired();
 
                     b.Navigation("Section");
-                });
-
-            modelBuilder.Entity("Api.YFC.Models.MinistryArticle", b =>
-                {
-                    b.HasOne("Api.YFC.Models.Ministry", "Ministry")
-                        .WithMany()
-                        .HasForeignKey("MinistryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Ministry");
-                });
-
-            modelBuilder.Entity("Api.YFC.Models.MinistryEvent", b =>
-                {
-                    b.HasOne("Api.YFC.Models.Ministry", "Ministry")
-                        .WithMany()
-                        .HasForeignKey("MinistryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Ministry");
-                });
-
-            modelBuilder.Entity("Api.YFC.Models.MinistryInfo", b =>
-                {
-                    b.HasOne("Api.YFC.Models.Ministry", "Ministry")
-                        .WithMany()
-                        .HasForeignKey("MinistryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Ministry");
-                });
-
-            modelBuilder.Entity("Api.YFC.Models.MinistryLeader", b =>
-                {
-                    b.HasOne("Api.YFC.Models.Ministry", "Ministry")
-                        .WithMany()
-                        .HasForeignKey("MinistryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Ministry");
-                });
-
-            modelBuilder.Entity("Api.YFC.Models.MinistrySchedule", b =>
-                {
-                    b.HasOne("Api.YFC.Models.Ministry", "Ministry")
-                        .WithMany()
-                        .HasForeignKey("MinistryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Ministry");
                 });
 
             modelBuilder.Entity("Api.YFC.Models.PastorMessage", b =>

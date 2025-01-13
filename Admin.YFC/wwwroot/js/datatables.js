@@ -166,3 +166,18 @@ $(document).ready(function () {
         ]
     });
 });
+
+$(document).ready(function () {
+    $('#testimonials').DataTable({
+        "ajax": "Testimonials/GetTestimonials",
+        "columns": [
+            { "data": "author" },
+            { "data": "content" },
+            {
+                "render": function (data, type, row) {
+                    return "<a href='Testimonials/Edit/" + row.testimonialId + "'; class='btn btn-dark btn-sm'>Update</a><a href = 'Testimonials/Remove/" + row.testimonialId + "'; class='btn btn-danger btn-sm' > Delete</a >";
+                }
+            }
+        ]
+    });
+});
