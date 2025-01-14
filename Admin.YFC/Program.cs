@@ -28,6 +28,18 @@ builder.Services.AddScoped<PastorServices, PastorServices>();
 builder.Services.AddScoped<SectionServices, SectionServices>();
 builder.Services.AddScoped<PastorMessageServices, PastorMessageServices>();
 builder.Services.AddScoped<TestimonialServices, TestimonialServices>();
+builder.Services.AddScoped<CommunityArticleServices, CommunityArticleServices>();
+builder.Services.AddScoped<CommunityEventServices, CommunityEventServices>();
+builder.Services.AddScoped<CommunityInfoServices, CommunityInfoServices>();
+builder.Services.AddScoped<CommunityLeaderServices, CommunityLeaderServices>();
+builder.Services.AddScoped<CommunityScheduleServices, CommunityScheduleServices>();
+builder.Services.AddScoped<MinistryArticleServices, MinistryArticleServices>();
+builder.Services.AddScoped<MinistryEventServices, MinistryEventServices>();
+builder.Services.AddScoped<MinistryInfoServices, MinistryInfoServices>();
+builder.Services.AddScoped<MinistryLeaderServices, MinistryLeaderServices>();
+builder.Services.AddScoped<MinistryScheduleServices, MinistryScheduleServices>();
+builder.Services.AddScoped<TestimonialServices, TestimonialServices>();
+
 
 var app = builder.Build();
 

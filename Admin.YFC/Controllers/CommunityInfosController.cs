@@ -25,7 +25,7 @@ namespace Admin.YFC.Controllers
 		public async Task<IActionResult> GetCommunityInfos()
 		{
 			var communityInfos = await _communityInfoServices.GetCommunityInfos();
-			return View(new { data = communityInfos });
+			return Json(new { data = communityInfos });
 		}
 
 		public async Task<IActionResult> Create()
@@ -54,7 +54,7 @@ namespace Admin.YFC.Controllers
 			var communityInfo = await _communityInfoServices.GetCommunityInfoById(id);
 			var communities = await _communityServices.GetCommunities();
 			ViewBag.Communities = new SelectList(communities, "CommunityId", "Name", communityInfo.CommunityId);
-			return View();
+			return View(communityInfo);
 		}
 
 		[HttpPost]
@@ -74,6 +74,8 @@ namespace Admin.YFC.Controllers
 		public async Task<IActionResult> Remove(int id)
 		{
 			var communityInfo = await _communityInfoServices.GetCommunityInfoById(id);
+			var communities = await _communityServices.GetCommunities();
+			ViewBag.Communities = new SelectList(communities, "CommunityId", "Name", communityInfo.CommunityId);
 			return View(communityInfo);
 		}
 

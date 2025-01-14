@@ -1,4 +1,4 @@
-﻿@model Admin.YFC.Models.Pastor
+﻿@model Admin.YFC.Models.CommunityLeader
 <div class="">
 
     <div class="clearfix"></div>
@@ -7,21 +7,24 @@
         <div class="col-md-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>New Pastor</h2>
+                    <h2>New Community Leader</h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
                     <div class="row">
                         <div class="col-sm-10 ">
-                            <form asp-action="Create" enctype="multipart/form-data">
-
+                            <form asp-action="Create">
+                                <div class="form-group">
+                                    <label asp-for="CommunityId"></label>
+                                    <select asp-for="CommunityId" class="form-control" asp-items="@ViewBag.Communities"></select>
+                                </div>
                                 <div class="form-group">
                                     <label asp-for="Name"></label>
                                     <input asp-for="Name" class="form-control" />
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="Signature"></label>
-                                    <input type="file" name="file" asp-for="Signature" class="form-control" />
+                                    <label asp-for="Email"></label>
+                                    <input asp-for="Email" class="form-control" />
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary">Save</button>

@@ -25,7 +25,7 @@ namespace Admin.YFC.Controllers
 		public async Task<IActionResult> GetCommunityLeaders()
 		{
 			var communityLeaders = await _communityLeaderServices.GetCommunityLeaders();
-			return View(new { data = communityLeaders });
+			return Json(new { data = communityLeaders });
 		}
 
 		public async Task<IActionResult> Create()
@@ -79,13 +79,9 @@ namespace Admin.YFC.Controllers
 			return View(communityLeader);
 		}
 
-		public async Task<IActionResult> Delete(int id)
+		public async Task<IActionResult> Delete([Bind("CommunityLeaderId,CommunityId,Name,Email")] CommunityLeader communityLeader)
 		{
-			var result = await _communityLeaderServices.DeleteCommunityLeader(id);
-			if (!string.IsNullOrWhiteSpace(result))
-			{
-				return RedirectToAction("Index");
-			}
+			var result = await _communityLeaderServices.DeleteCommunityLeader(communityLeader.CommunityLeaderId);
 			return RedirectToAction("Index");
 		}
 	}

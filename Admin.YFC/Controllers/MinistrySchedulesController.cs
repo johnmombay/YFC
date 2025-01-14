@@ -32,6 +32,7 @@ namespace Admin.YFC.Controllers
 		{
 			var ministries = await _ministryServices.GetMinistries();
 			ViewBag.Ministries = new SelectList(ministries, "MinistryId", "Name");
+			ViewBag.Days = new SelectList(new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" });
 			return View();
 		}
 
@@ -51,6 +52,7 @@ namespace Admin.YFC.Controllers
 			var ministrySchedule = await _ministryScheduleServices.GetMinistryScheduleById(id);
 			var ministries = await _ministryServices.GetMinistries();
 			ViewBag.Ministries = new SelectList(ministries, "MinistryId", "Name", ministrySchedule.MinistryId);
+			ViewBag.Days = new SelectList(new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" }, ministrySchedule.Day);
 			return View(ministrySchedule);
 		}
 
@@ -70,6 +72,7 @@ namespace Admin.YFC.Controllers
 			var ministrySchedule = await _ministryScheduleServices.GetMinistryScheduleById(id);
 			var ministries = await _ministryServices.GetMinistries();
 			ViewBag.Ministries = new SelectList(ministries, "MinistryId", "Name", ministrySchedule.MinistryId);
+			ViewBag.Days = new SelectList(new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" }, ministrySchedule.Day);
 			return View(ministrySchedule);
 		}
 

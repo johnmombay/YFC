@@ -13,6 +13,7 @@
                     <li><a asp-action="Index" asp-controller="Churches">About the Church</a></li>
                     <li><a asp-action="Index" asp-controller="Sections">Sections</a></li>
                     <li><a asp-action="Index" asp-controller="Contents">Contents</a></li>
+                    <li><a asp-action="Index" asp-controller="Testimonials">Testimonials</a></li>
                     <li>
                         <a><i class="fa fa-edit"></i> Pastor's Message <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
@@ -20,13 +21,38 @@
                             <li><a asp-action="Index" asp-controller="PastorMessages">Messages</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a><i class="fa fa-edit"></i> Groups <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a asp-action="Index" asp-controller="Ministries">Ministries</a></li>
+                            <li><a asp-action="Index" asp-controller="Communities">Communities</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </li>
             <li>
                 <a><i class="fa fa-edit"></i> Groups <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                    <li><a asp-action="Index" asp-controller="Communities">Communities</a></li>
-                    <li><a asp-action="Index" asp-controller="Ministries">Ministries</a></li>
+                    <li>
+                        <a><i class="fa fa-edit"></i> Communities <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a asp-action="Index" asp-controller="CommunityInfos">Information</a></li>
+                            <li><a asp-action="Index" asp-controller="CommunityLeaders">Leaders</a></li>
+                            <li><a asp-action="Index" asp-controller="CommunitySchedules">Schedules</a></li>
+                            <li><a asp-action="Index" asp-controller="CommunityEvents">Events</a></li>
+                            <li><a asp-action="Index" asp-controller="CommunityArticles">Articles</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a><i class="fa fa-edit"></i> Ministries <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a asp-action="Index" asp-controller="MinistryInfos">Information</a></li>
+                            <li><a asp-action="Index" asp-controller="MinistryLeaders">Leaders</a></li>
+                            <li><a asp-action="Index" asp-controller="MinistrySchedules">Schedules</a></li>
+                            <li><a asp-action="Index" asp-controller="MinistryEvents">Events</a></li>
+                            <li><a asp-action="Index" asp-controller="MinistryArticles">Articles</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </li>
             <li>

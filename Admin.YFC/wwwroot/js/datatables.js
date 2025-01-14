@@ -181,3 +181,170 @@ $(document).ready(function () {
         ]
     });
 });
+
+$(document).ready(function () {
+    $('#communityArticles').DataTable({
+        "ajax": "CommunityArticles/GetCommunityArticles",
+        "columns": [
+            { "data": "communityId" },
+            { "data": "title" },
+            { "data": "content" },
+            {
+                "render": function (data, type, row) {
+                    return "<a href='CommunityArticles/Edit/" + row.communityArticleId + "'; class='btn btn-dark btn-sm'>Update</a><a href = 'CommunityArticles/Remove/" + row.communityArticleId + "'; class='btn btn-danger btn-sm' > Delete</a >";
+                }
+            }
+        ]
+    });
+});
+
+$(document).ready(function () {
+    $('#communityEvents').DataTable({
+        "ajax": "CommunityEvents/GetCommunityEvents",
+        "columns": [
+            { "data": "communityId" },
+            { "data": "title" },
+            { "data": "description" },
+            { "data": "eventDate" },
+            {
+                "render": function (data, type, row) {
+                    return "<a href='CommunityEvents/Edit/" + row.communityEventId + "'; class='btn btn-dark btn-sm'>Update</a><a href = 'CommunityEvents/Remove/" + row.communityEventId + "'; class='btn btn-danger btn-sm' > Delete</a >";
+                }
+            }
+        ]
+    });
+});
+
+$(document).ready(function () {
+    $('#communityInfos').DataTable({
+        "ajax": "CommunityInfos/GetCommunityInfos",
+        "columns": [
+            { "data": "communityId" },
+            { "data": "content" },
+            {
+                "render": function (data, type, row) {
+                    return "<a href='CommunityInfos/Edit/" + row.communityInfoId + "'; class='btn btn-dark btn-sm'>Update</a><a href = 'CommunityInfos/Remove/" + row.communityInfoId + "'; class='btn btn-danger btn-sm' > Delete</a >";
+                }
+            }
+        ]
+    });
+});
+
+$(document).ready(function () {
+    $('#communityLeaders').DataTable({
+        "ajax": "CommunityLeaders/GetCommunityLeaders",
+        "columns": [
+            { "data": "communityId" },
+            { "data": "name" },
+            { "data": "email" },
+            {
+                "render": function (data, type, row) {
+                    return "<a href='CommunityLeaders/Edit/" + row.communityLeaderId + "'; class='btn btn-dark btn-sm'>Update</a><a href = 'CommunityLeaders/Remove/" + row.communityLeaderId + "'; class='btn btn-danger btn-sm' > Delete</a >";
+                }
+            }
+        ]
+    });
+});
+
+$(document).ready(function () {
+    $('#communitySchedules').DataTable({
+        "ajax": "CommunitySchedules/GetCommunitySchedules",
+        "columns": [
+            { "data": "communityId" },
+            { "data": "title" },
+            { "data": "description" },
+            { "data": "day" },
+            { "data": "time" },
+            {
+                "render": function (data, type, row) {
+                    return "<a href='CommunitySchedules/Edit/" + row.communityScheduleId + "'; class='btn btn-dark btn-sm'>Update</a><a href = 'CommunitySchedules/Remove/" + row.communityScheduleId + "'; class='btn btn-danger btn-sm' > Delete</a >";
+                }
+            }
+        ]
+    });
+});
+
+
+
+
+$(document).ready(function () {
+    $('#ministryArticles').DataTable({
+        "ajax": "MinistryArticles/GetMinistryArticles",
+        "columns": [
+            { "data": "ministryId" },
+            { "data": "title" },
+            { "data": "content" },
+            {
+                "render": function (data, type, row) {
+                    return "<a href='MinistryArticles/Edit/" + row.ministryArticleId + "'; class='btn btn-dark btn-sm'>Update</a><a href = 'MinistryArticles/Remove/" + row.ministryArticleId + "'; class='btn btn-danger btn-sm' > Delete</a >";
+                }
+            }
+        ]
+    });
+});
+
+$(document).ready(function () {
+    $('#ministryEvents').DataTable({
+        "ajax": "MinistryEvents/GetMinistryEvents",
+        "columns": [
+            { "data": "ministryId" },
+            { "data": "title" },
+            { "data": "description" },
+            { "data": "eventDate" },
+            {
+                "render": function (data, type, row) {
+                    return "<a href='MinistryEvents/Edit/" + row.ministryEventId + "'; class='btn btn-dark btn-sm'>Update</a><a href = 'MinistryEvents/Remove/" + row.ministryEventId + "'; class='btn btn-danger btn-sm' > Delete</a >";
+                }
+            }
+        ]
+    });
+});
+
+$(document).ready(function () {
+    $('#ministryInfos').DataTable({
+        "ajax": "MinistryInfos/GetMinistryInfos",
+        "columns": [
+            { "data": "ministryId" },
+            { "data": "content" },
+            {
+                "render": function (data, type, row) {
+                    return "<a href='MinistryInfos/Edit/" + row.ministryInfoId + "'; class='btn btn-dark btn-sm'>Update</a><a href = 'MinistryInfos/Remove/" + row.ministryInfoId + "'; class='btn btn-danger btn-sm' > Delete</a >";
+                }
+            }
+        ]
+    });
+});
+
+$(document).ready(function () {
+    $('#ministryLeaders').DataTable({
+        "ajax": "MinistryLeaders/GetMinistryLeaders",
+        "columns": [
+            { "data": "ministryId" },
+            { "data": "name" },
+            { "data": "email" },
+            {
+                "render": function (data, type, row) {
+                    return "<a href='MinistryLeaders/Edit/" + row.ministryLeaderId + "'; class='btn btn-dark btn-sm'>Update</a><a href = 'MinistryLeaders/Remove/" + row.ministryLeaderId + "'; class='btn btn-danger btn-sm' > Delete</a >";
+                }
+            }
+        ]
+    });
+});
+
+$(document).ready(function () {
+    $('#ministrySchedules').DataTable({
+        "ajax": "MinistrySchedules/GetMinistrySchedules",
+        "columns": [
+            { "data": "ministryId" },
+            { "data": "title" },
+            { "data": "description" },
+            { "data": "day" },
+            { "data": "time" },
+            {
+                "render": function (data, type, row) {
+                    return "<a href='MinistrySchedules/Edit/" + row.ministryScheduleId + "'; class='btn btn-dark btn-sm'>Update</a><a href = 'MinistrySchedules/Remove/" + row.ministryScheduleId + "'; class='btn btn-danger btn-sm' > Delete</a >";
+                }
+            }
+        ]
+    });
+});

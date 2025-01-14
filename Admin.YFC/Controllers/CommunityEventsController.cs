@@ -28,7 +28,7 @@ namespace Admin.YFC.Controllers
 		public async Task<IActionResult> GetCommunityEvents()
 		{
 			var communityEvents = await _communityEventServices.GetCommunityEvents();
-			return View(new { data = communityEvents });
+			return Json(new { data = communityEvents });
 		}
 
 		public async Task<IActionResult> Create()

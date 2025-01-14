@@ -12,11 +12,11 @@ namespace Api.YFC.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CommunityInfoesController : ControllerBase
+    public class CommunityInfosController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public CommunityInfoesController(ApplicationDbContext context)
+        public CommunityInfosController(ApplicationDbContext context)
         {
             _context = context;
         }

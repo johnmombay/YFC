@@ -25,13 +25,14 @@ namespace Admin.YFC.Controllers
 		public async Task<IActionResult> GetCommunitySchedules()
 		{
 			var communitySchedules = await _communityScheduleServices.GetCommunitySchedules();
-			return View(new { data = communitySchedules });
+			return Json(new { data = communitySchedules });
 		}
 
 		public async Task<IActionResult> Create()
 		{
 			var communities = await _communityServices.GetCommunities();
 			ViewBag.Communities = new SelectList(communities, "CommunityId", "Name");
+			ViewBag.Days = new SelectList(new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" });
 			return View();
 		}
 
@@ -54,6 +55,7 @@ namespace Admin.YFC.Controllers
 			var communitySchedule = await _communityScheduleServices.GetCommunityScheduleById(id);
 			var communities = await _communityServices.GetCommunities();
 			ViewBag.Communities = new SelectList(communities, "CommunityId", "Name", communitySchedule.CommunityId);
+			ViewBag.Days = new SelectList(new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" },communitySchedule.Day);
 			return View(communitySchedule);
 		}
 
@@ -76,13 +78,14 @@ namespace Admin.YFC.Controllers
 			var communitySchedule = await _communityScheduleServices.GetCommunityScheduleById(id);
 			var communities = await _communityServices.GetCommunities();
 			ViewBag.Communities = new SelectList(communities, "CommunityId", "Name", communitySchedule.CommunityId);
+			ViewBag.Days = new SelectList(new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" }, communitySchedule.Day);
 			return View(communitySchedule);
 		}
 
 
-		public async Task<IActionResult> Delete(int id)
+		public async Task<IActionResult> Delete([Bind("CommunityScheduleId,CommunityId,Title,Description,Day,Time")] CommunitySchedule communitySchedule)
 		{
-			var result = await _communityScheduleServices.DeleteCommunitySchedule(id);
+			var result = await _communityScheduleServices.DeleteCommunitySchedule(communitySchedule.CommunityScheduleId);
 			return RedirectToAction("Index");
 		}
 	}

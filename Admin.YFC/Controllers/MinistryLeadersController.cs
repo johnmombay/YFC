@@ -36,7 +36,7 @@ namespace Admin.YFC.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Create(IFormFile file, [Bind("MinistryId,Name,Email")] MinistryLeader ministryLeader)
+		public async Task<IActionResult> Create([Bind("MinistryId,Name,Email")] MinistryLeader ministryLeader)
 		{
 			if (ModelState.IsValid)
 			{
@@ -55,7 +55,7 @@ namespace Admin.YFC.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Edit(IFormFile file, [Bind("MinistryLeaderId,MinistryId,Name,Email")] MinistryLeader ministryLeader)
+		public async Task<IActionResult> Edit([Bind("MinistryLeaderId,MinistryId,Name,Email")] MinistryLeader ministryLeader)
 		{
 			if (ModelState.IsValid)
 			{

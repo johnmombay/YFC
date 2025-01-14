@@ -24,7 +24,7 @@ namespace Admin.YFC.Controllers
 		public async Task<IActionResult> GetCommunityArticles()
 		{
 			var communityArticles = await _communityArticleServices.GetCommunityArticles();
-			return View(new { data = communityArticles });
+			return Json(new { data = communityArticles });
 		}
 
 		public async Task<IActionResult> Create()
@@ -49,7 +49,7 @@ namespace Admin.YFC.Controllers
 		{
 			var communityArticle = await _communityArticleServices.GetCommunityArticleById(id);
 			var communities = await _communityServices.GetCommunities();
-			ViewBag.Communities = new SelectList(communities, "CommunityId", "Name",communityArticle.CommunityId);
+			ViewBag.Communities = new SelectList(communities, "CommunityId", "Name", communityArticle.CommunityId);
 			return View(communityArticle);
 		}
 
@@ -71,12 +71,15 @@ namespace Admin.YFC.Controllers
 		public async Task<IActionResult> Remove(int id)
 		{
 			var communityArticle = await _communityArticleServices.GetCommunityArticleById(id);
+			var communities = await _communityServices.GetCommunities();
+			ViewBag.Communities = new SelectList(communities, "CommunityId", "Name", communityArticle.CommunityId);
 			return View(communityArticle);
 		}
 
-		public async Task<IActionResult> Delete(int id)
+		public async Task<IActionResult> Delete([Bind("CommunityArticleId,CommunityId,Title,Content")] CommunityArticle communityArticle)
 		{
-			await _communityArticleServices.DeleteCommunityArticle(id);
+			await _communityArticleServices.DeleteCommunityArticle(communityArticle.CommunityArticleId);
 			return RedirectToAction("Index");
 		}
 	}
+}
