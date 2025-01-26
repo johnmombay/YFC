@@ -28,8 +28,15 @@ namespace Api.YFC.Controllers
             return await _context.MinistryEvents.ToListAsync();
         }
 
-        // GET: api/MinistryEvents/5
-        [HttpGet("{id}")]
+		[HttpGet]
+        [Route("GetMinistryEventsByMinistryId/{id}")]
+		public async Task<ActionResult<IEnumerable<MinistryEvent>>> GetMinistryEventsByMinistryId(int id)
+		{
+			return await _context.MinistryEvents.Where(m=> m.MinistryId == id).ToListAsync();
+		}
+
+		// GET: api/MinistryEvents/5
+		[HttpGet("{id}")]
         public async Task<ActionResult<MinistryEvent>> GetMinistryEvent(int id)
         {
             var ministryEvent = await _context.MinistryEvents.FindAsync(id);
@@ -41,6 +48,7 @@ namespace Api.YFC.Controllers
 
             return ministryEvent;
         }
+
 
         // PUT: api/MinistryEvents/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

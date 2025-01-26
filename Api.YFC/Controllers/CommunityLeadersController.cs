@@ -28,8 +28,15 @@ namespace Api.YFC.Controllers
             return await _context.CommunityLeaders.ToListAsync();
         }
 
-        // GET: api/CommunityLeaders/5
-        [HttpGet("{id}")]
+		[HttpGet]
+        [Route("GetCommunityLeadersByCommunityId/{id}")]
+		public async Task<ActionResult<IEnumerable<CommunityLeader>>> GetCommunityLeadersByCommunityId(int id)
+		{
+			return await _context.CommunityLeaders.Where(c=>c.CommunityId == id).ToListAsync();
+		}
+
+		// GET: api/CommunityLeaders/5
+		[HttpGet("{id}")]
         public async Task<ActionResult<CommunityLeader>> GetCommunityLeader(int id)
         {
             var communityLeader = await _context.CommunityLeaders.FindAsync(id);

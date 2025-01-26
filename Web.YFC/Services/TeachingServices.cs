@@ -18,6 +18,18 @@ namespace Web.YFC.Services
 			return contacts;
 		}
 
+		public async Task<List<Teaching>> GetLatestTeachings()
+		{
+			List<Teaching> contacts = new List<Teaching>();
+
+			var result = await RestCall.Get(AppSettings.ApiUri + EndPoints.TeachingEndpoint + "/GetLatestTeachings");
+			if (!string.IsNullOrWhiteSpace(result))
+			{
+				contacts = JsonSerializer.Deserialize<List<Teaching>>(result, AppSettings.options)!;
+			}
+			return contacts;
+		}
+
 		public async Task<Teaching> GetTeachingById(int id)
 		{
 			Teaching Teaching = new Teaching();

@@ -18,6 +18,18 @@ namespace Web.YFC.Services
 			return contacts;
 		}
 
+		public async Task<List<Headline>> GetEnabledHeadlines()
+		{
+			List<Headline> contacts = new List<Headline>();
+
+			var result = await RestCall.Get(AppSettings.ApiUri + EndPoints.HeadlineEndpoint + "/GetEnabledHeadlines");
+			if (!string.IsNullOrWhiteSpace(result))
+			{
+				contacts = JsonSerializer.Deserialize<List<Headline>>(result, AppSettings.options)!;
+			}
+			return contacts;
+		}
+
 		public async Task<Headline> GetHeadlineById(int id)
 		{
 			Headline Headline = new Headline();

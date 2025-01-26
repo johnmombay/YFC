@@ -6,7 +6,7 @@ namespace Web.YFC.Services
 {
 	public class PastorMessageServices
 	{
-		public async Task<List<PastorMessage>> GetMinistries()
+		public async Task<List<PastorMessage>> GetPastorMessages()
 		{
 			List<PastorMessage> contacts = new List<PastorMessage>();
 

@@ -1,0 +1,122 @@
+﻿@using Web.YFC.Common
+<!-- subheader begin -->
+<section id="subheader" data-speed="2" data-type="background">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                <h1>@ViewBag.Community Community</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- subheader close -->
+
+<div class="clearfix"></div>
+
+<!-- content begin -->
+<div id="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="blog-read">
+                    <div>
+                        <div class="preview">
+                            @Html.Raw(ViewBag.Information)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="blog-read">
+                    <h3>Leadership Team</h3>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email Address</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach(var leader in ViewData["Leaders"] as IEnumerable<CommunityLeader>)
+                                {
+                                <tr>
+                                    <td>@leader.Name</td>
+                                    <td>@leader.Email</td>
+                                </tr>
+                                }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="blog-read">
+                    <h3>Schedules</h3>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Day</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var schedule in ViewData["Schedules"] as IEnumerable<CommunitySchedule>)
+                            {
+                                <tr>
+                                    <td>@schedule.Title</td>
+                                    <td>@schedule.Description</td>
+                                    <td>@schedule.Day</td>
+                                    <td>@schedule.Time.ToString("hh:mm tt")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="blog-read">
+                    <h3>Latest Articles</h3>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var article in ViewData["Articles"] as IEnumerable<CommunityArticle>)
+                            {
+                                <tr>
+                                    <td><a asp-action="CommunityArticleContent" asp-route-id="@article.CommunityArticleId">@article.Title</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- section begin -->
+    <section id="section-text">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center wow fadeInUp">
+                    <h2>Upcoming Events</h2>
+                    <div class="divider-double"></div>
+                </div>
+
+                @foreach (var _event in ViewData["Events"] as IEnumerable<CommunityEvent>)
+                {
+                    <div class="col-md-4 wow fadeInRight" data-wow-delay=".5s">
+                        <img src="@AppSettings.ImageUrl/Churches/@_event.CommunityEventId/@_event.Picture" class="img-responsive" alt="">
+                        <h3>@_event.Title</h3>
+                        <span>@_event.Description<br/>
+                            @_event.EventDate.ToString("MMMM dd, yyyy hh mm tt")
+                        </span>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+    <!-- section close -->
+
+</div>
+<!-- content close -->

@@ -7,10 +7,10 @@
             <div class="col-md-6">
                 <nav>
                     <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Events</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a asp-action="Index" asp-controller="Home">Home</a></li>
+                        <li><a asp-action="Content" asp-controller="Home" asp-route-id="1">About Us</a></li>
+                        <li><a asp-action="Event" asp-controller="Home">Events</a></li>
+                        <li><a asp-action="Contact" asp-controller="Home">Contact Us</a></li>
                     </ul>
                 </nav>
             </div>

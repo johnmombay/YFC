@@ -28,8 +28,15 @@ namespace Api.YFC.Controllers
             return await _context.CommunityEvents.ToListAsync();
         }
 
-        // GET: api/CommunityEvents/5
-        [HttpGet("{id}")]
+		[HttpGet]
+        [Route("GetCommunityEventsByCommunityId/{id}")]
+		public async Task<ActionResult<IEnumerable<CommunityEvent>>> GetCommunityEventsByCommunityId(int id)
+		{
+			return await _context.CommunityEvents.Where(c=>c.CommunityId == id).ToListAsync();
+		}
+
+		// GET: api/CommunityEvents/5
+		[HttpGet("{id}")]
         public async Task<ActionResult<CommunityEvent>> GetCommunityEvent(int id)
         {
             var communityEvent = await _context.CommunityEvents.FindAsync(id);

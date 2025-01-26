@@ -42,9 +42,23 @@ namespace Api.YFC.Controllers
             return headline;
         }
 
-        // PUT: api/Headlines/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+		[HttpGet]
+        [Route("GetEnabledHeadlines")]
+		public async Task<ActionResult<List<Headline>>> GetEnabledHeadline()
+		{
+            var headlines = await _context.Headlines.Where(h => h.Enable == true).ToListAsync();
+
+			if (headlines == null)
+			{
+				return NotFound();
+			}
+
+			return headlines;
+		}
+
+		// PUT: api/Headlines/5
+		// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+		[HttpPut("{id}")]
         public async Task<IActionResult> PutHeadline(int id, Headline headline)
         {
             if (id != headline.HeadlineId)

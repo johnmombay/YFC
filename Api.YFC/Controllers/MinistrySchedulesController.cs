@@ -28,8 +28,15 @@ namespace Api.YFC.Controllers
             return await _context.MinistrySchedules.ToListAsync();
         }
 
-        // GET: api/MinistrySchedules/5
-        [HttpGet("{id}")]
+		[HttpGet]
+		[Route("GetMinistrySchedulesByMinistryId/{id}")]
+		public async Task<ActionResult<IEnumerable<MinistrySchedule>>> GetMinistrySchedulesByMinistryId(int id)
+		{
+			return await _context.MinistrySchedules.Where(m => m.MinistryId == id).ToListAsync();
+		}
+
+		// GET: api/MinistrySchedules/5
+		[HttpGet("{id}")]
         public async Task<ActionResult<MinistrySchedule>> GetMinistrySchedule(int id)
         {
             var ministrySchedule = await _context.MinistrySchedules.FindAsync(id);

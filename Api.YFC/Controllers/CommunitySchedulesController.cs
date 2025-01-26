@@ -28,8 +28,15 @@ namespace Api.YFC.Controllers
             return await _context.CommunitySchedules.ToListAsync();
         }
 
-        // GET: api/CommunitySchedules/5
-        [HttpGet("{id}")]
+		[HttpGet]
+        [Route("GetCommunitySchedulesByCommunityId/{id}")]
+		public async Task<ActionResult<IEnumerable<CommunitySchedule>>> GetCommunitySchedulesByCommunityId(int id)
+		{
+			return await _context.CommunitySchedules.Where(c=>c.CommunityId == id).ToListAsync();
+		}
+
+		// GET: api/CommunitySchedules/5
+		[HttpGet("{id}")]
         public async Task<ActionResult<CommunitySchedule>> GetCommunitySchedule(int id)
         {
             var communitySchedule = await _context.CommunitySchedules.FindAsync(id);

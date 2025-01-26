@@ -28,8 +28,15 @@ namespace Api.YFC.Controllers
             return await _context.Teachings.ToListAsync();
         }
 
-        // GET: api/Teachings/5
-        [HttpGet("{id}")]
+		[HttpGet]
+        [Route("GetLatestTeachings")]
+		public async Task<ActionResult<IEnumerable<Teaching>>> GetLatestTeachings()
+		{
+			return await _context.Teachings.OrderByDescending(d=>d.TeachingDate).Take(5).ToListAsync();
+		}
+
+		// GET: api/Teachings/5
+		[HttpGet("{id}")]
         public async Task<ActionResult<Teaching>> GetTeaching(int id)
         {
             var teaching = await _context.Teachings.FindAsync(id);

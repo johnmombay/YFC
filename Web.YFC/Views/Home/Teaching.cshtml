@@ -1,0 +1,47 @@
+﻿@using Web.YFC.Common
+<!-- subheader begin -->
+<section id="subheader" data-speed="2" data-type="background">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                <h1>Teachings</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- subheader close -->
+
+<div class="clearfix"></div>
+
+<!-- content begin -->
+<div id="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+
+                @foreach (var teaching in ViewData["Teachings"] as IEnumerable<Teaching>)
+                {
+                    <div class="custom-col-3">
+                        <div class="left-col">
+                            <img src="@AppSettings.ImageUrl/Teachings/@teaching.TeachingId/@teaching.Picture" alt="" class="img-responsive">
+                        </div>
+                        <div class="mid-col">
+                            <a href="#">
+                                <h3>@teaching.Title</h3>
+                            </a>
+                            <div class="details"><span>By <a href="#">@teaching.Speaker</a>, @teaching.TeachingDate.ToString("MMMM dd, yyyy").</span></div>
+                        </div>
+                        <div class="right-col">
+                            <a href="@teaching.Video" target="_blank"><i class="fa fa-video-camera"></i></a>
+                            <a href="@teaching.Audio" target="_blank"><i class="fa fa-volume-up"></i></a>
+                            <a href="@teaching.PDF" target="_blank"><i class="fa fa-file-pdf-o"></i></a>
+                        </div>
+                    </div>
+                }
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!-- content close -->

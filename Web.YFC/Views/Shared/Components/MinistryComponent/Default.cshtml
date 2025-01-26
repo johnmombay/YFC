@@ -3,6 +3,6 @@
 <ul>
     @foreach (var ministry in Model)
     {
-        <li><a asp-action="Index" asp-controller="Ministries" asp-route-id="@ministry.MinistryId">@ministry.Name</a></li>
+        <li><a asp-action="Ministry" asp-controller="Home" asp-route-id="@ministry.MinistryId">@ministry.Name</a></li>
     }
 </ul>

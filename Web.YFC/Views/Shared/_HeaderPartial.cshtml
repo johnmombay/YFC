@@ -24,21 +24,21 @@
                 <div id="mainmenu-container">
                     <ul id="mainmenu">
                         <li>
-                            <a href="index.html">Home</a>
+                            <a asp-action="Index" asp-controller="Home">Home</a>
                         </li>
                         <li>
-                            <a href="events.html">Teachings</a>
+                            <a asp-action="Teaching" asp-controller="Home">Teachings</a>
                         </li>
                         <li>
-                            <a href="sermons.html">Ministries</a>
+                            <a>Ministries</a>
                             @await Component.InvokeAsync("MinistryComponent")
                         </li>
                         <li>
-                            <a href="features.html">Communities</a>
+                            <a>Communities</a>
                             @await Component.InvokeAsync("CommunityComponent")
                         </li>
                         <li>
-                            <a href="news.html">Contact Us</a>
+                            <a asp-action="Contact" asp-controller="Home">Contact Us</a>
                         </li>
                     </ul>
                 </div>

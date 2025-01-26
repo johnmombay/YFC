@@ -28,8 +28,8 @@ namespace Api.YFC.Controllers
             return await _context.CommunityInfos.ToListAsync();
         }
 
-        // GET: api/CommunityInfoes/5
-        [HttpGet("{id}")]
+		// GET: api/CommunityInfoes/5
+		[HttpGet("{id}")]
         public async Task<ActionResult<CommunityInfo>> GetCommunityInfo(int id)
         {
             var communityInfo = await _context.CommunityInfos.FindAsync(id);
@@ -42,9 +42,23 @@ namespace Api.YFC.Controllers
             return communityInfo;
         }
 
-        // PUT: api/CommunityInfoes/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+		[HttpGet]
+		[Route("GetCommunityInfosByCommunityId/{id}")]
+		public async Task<ActionResult<CommunityInfo>> GetCommunityInfosByCommunityId(int id)
+		{
+            var communityInfo = await _context.CommunityInfos.Where(c => c.CommunityId == id).FirstOrDefaultAsync();
+
+			if (communityInfo == null)
+			{
+				return NotFound();
+			}
+
+			return communityInfo;
+		}
+
+		// PUT: api/CommunityInfoes/5
+		// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+		[HttpPut("{id}")]
         public async Task<IActionResult> PutCommunityInfo(int id, CommunityInfo communityInfo)
         {
             if (id != communityInfo.CommunityInfoId)

@@ -7,10 +7,13 @@ namespace Admin.YFC.Controllers
 	public class PastorsController : Controller
 	{
 		private readonly PastorServices _pastorServices;
+		private readonly FileUploadServices _fileUploadServices;
 
-		public PastorsController(PastorServices pastorServices)
+		public PastorsController(PastorServices pastorServices,
+			FileUploadServices fileUploadServices)
 		{
 			_pastorServices = pastorServices;
+			_fileUploadServices = fileUploadServices;
 		}
 
 		public IActionResult Index()
@@ -30,12 +33,17 @@ namespace Admin.YFC.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Create([Bind("Name,Signature")] Pastor pastor)
+		public async Task<IActionResult> Create(IFormFile file, [Bind("Name,Signature")] Pastor pastor)
 		{
-			var newPastor = await _pastorServices.AddPastor(pastor);
-			if (newPastor.PastorId > 0)
+			pastor.Signature = file.FileName;
+			if (file != null)
 			{
-				return RedirectToAction("Index");
+				var newPastor = await _pastorServices.AddPastor(pastor);
+				if (newPastor.PastorId > 0)
+				{
+					await _fileUploadServices.Upload(file, "Pastors/" + newPastor.PastorId + "/", file.FileName);
+					return RedirectToAction("Index");
+				}
 			}
 			return View(pastor);
 		}
@@ -47,14 +55,16 @@ namespace Admin.YFC.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Edit(int id, [Bind("PastorId,Name,Signature")] Pastor pastor)
+		public async Task<IActionResult> Edit(IFormFile file, int id, [Bind("PastorId,Name,Signature")] Pastor pastor)
 		{
-			var updatedPastor = await _pastorServices.UpdatePastor(pastor);
-			if (updatedPastor.PastorId > 0)
+			if (file != null)
 			{
-				return RedirectToAction("Index");
+				await _fileUploadServices.Upload(file, "Pastors/" + pastor.PastorId + "/", file.FileName);
+				await _fileUploadServices.Remove("Pastors", pastor.PastorId.ToString(), pastor.Signature);
+				pastor.Signature = file.FileName;
 			}
-			return View(pastor);
+			await _pastorServices.UpdatePastor(pastor);
+			return RedirectToAction("Index");
 		}
 
 		public async Task<IActionResult> Remove(int id)

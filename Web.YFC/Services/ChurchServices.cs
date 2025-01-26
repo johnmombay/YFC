@@ -6,7 +6,7 @@ namespace Web.YFC.Services
 {
 	public class ChurchServices
 	{
-		public async Task<List<Church>> GetMinistries()
+		public async Task<List<Church>> GetChurches()
 		{
 			List<Church> contacts = new List<Church>();
 
