@@ -1,0 +1,37 @@
+﻿@using Web.YFC.Common
+
+<!-- subheader begin -->
+<section id="subheader" data-speed="2" data-type="background">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                <h1>Photo Gallery</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- subheader close -->
+
+<div class="clearfix"></div>
+
+<div id="content">
+    <div class="container">
+        <div class="row">
+                <div class="blog-read">
+                    
+                    @foreach (var item in ViewData["PhotoItems"] as IEnumerable<RssPhotoItem>)
+                    {                       
+                        <div class="col-md-3">
+                            <img src="@item.ImageUrl" alt="@item.Title" class="img-responsive" />
+                            <div>@item.Title</div>
+                        </div>
+                    }
+
+                </div>
+
+            
+        </div>
+
+    </div>
+</div>

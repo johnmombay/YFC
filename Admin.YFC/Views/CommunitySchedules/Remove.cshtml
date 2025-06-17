@@ -16,7 +16,7 @@
                             <form asp-action="Delete">
                                 <input type="hidden" asp-for="CommunityScheduleId" />
                                 <div class="form-group">
-                                    <label asp-for="CommunityId"></label>
+                                    <label asp-for="CommunityId">Community</label>
                                     <select asp-for="CommunityId" class="form-control" asp-items="@ViewBag.Communities"></select>
                                 </div>
                                 <div class="form-group">

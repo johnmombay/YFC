@@ -1,5 +1,6 @@
 ﻿using Admin.YFC.Models;
 using Admin.YFC.Services;
+using Admin.YFC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -25,7 +26,20 @@ namespace Admin.YFC.Controllers
 		public async Task<IActionResult> GetCommunityInfos()
 		{
 			var communityInfos = await _communityInfoServices.GetCommunityInfos();
-			return Json(new { data = communityInfos });
+			var communities = await _communityServices.GetCommunities();
+			List<CommunityInfoViewModel> communityInfoViewModel = new List<CommunityInfoViewModel>();
+			foreach (var communityInfo in communityInfos)
+			{
+				var community = communities.FirstOrDefault(c => c.CommunityId == communityInfo.CommunityId);
+				communityInfoViewModel.Add(new CommunityInfoViewModel
+				{
+					CommunityInfoId = communityInfo.CommunityInfoId,
+					CommunityId = communityInfo.CommunityId,
+					Community = community?.Name, // Map the community name explicitly
+					Content = communityInfo.Content
+				});
+			}
+			return Json(new { data = communityInfoViewModel });
 		}
 
 		public async Task<IActionResult> Create()

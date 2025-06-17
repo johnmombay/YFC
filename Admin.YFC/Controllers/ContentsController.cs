@@ -1,5 +1,6 @@
 ﻿using Admin.YFC.Models;
 using Admin.YFC.Services;
+using Admin.YFC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -24,7 +25,22 @@ namespace Admin.YFC.Controllers
 		public async Task<IActionResult> GetContents()
 		{
 			var contents = await _contentServices.GetContents();
-			return Json(new { data = contents });
+			var sections = await _sectionServices.GetSections();
+			List<ContentViewModel> contentViewModel = new List<ContentViewModel>();
+
+			foreach (var content in contents)
+			{
+				var section = sections.FirstOrDefault(s => s.SectionId == content.SectionId);
+				contentViewModel.Add(new ContentViewModel
+				{
+					ContentId = content.ContentId,
+					SectionId = content.SectionId,
+					Material = content.Material,
+					Section = section?.Name // Map the section name explicitly
+				});
+			}
+
+			return Json(new { data = contentViewModel });
 		}
 
 		public async Task<IActionResult> Create()

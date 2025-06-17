@@ -5,54 +5,57 @@
     <div class="fullwidthbanner-container">
         <div id="revolution-slider">
             <ul>
-                @foreach(var headline in ViewData["Headlines"] as IEnumerable<Headline>)
+                @foreach (var headline in ViewData["Headlines"] as IEnumerable<Headline>)
                 {
-                    <li data-transition="fade" data-slotamount="10" data-masterspeed="1500">
-                        <!--  BACKGROUND IMAGE -->
-                        <img src="@AppSettings.ImageUrl/Headlines/@headline.HeadlineId/@headline.Picture" alt="">
+                    <li data-transition="fade" data-slotamount="10" data-masterspeed="1000">
+                        <!-- BACKGROUND IMAGE -->
+                        <img src="@AppSettings.ImageUrl/Headlines/@headline.HeadlineId/@headline.Picture"
+                             alt=""
+                             loading="lazy">
+
                         <div class="tp-caption border-v lft"
-                        data-x="540"
-                        data-y="center"
-                        data-speed="800"
-                        data-start="400"
-                        data-easing="easeInOutCubic"
-                        data-endspeed="300">
+                             data-x="540"
+                             data-y="center"
+                             data-speed="600"
+                             data-start="400"
+                             data-easing="easeInOutCubic"
+                             data-endspeed="300">
                         </div>
 
                         <div class="tp-caption custom-font-1 lft"
-                        data-x="600"
-                        data-y="140"
-                        data-speed="800"
-                        data-start="1000"
-                        data-easing="easeInOutCubic"
-                        data-endspeed="300">
+                             data-x="600"
+                             data-y="140"
+                             data-speed="600"
+                             data-start="800"
+                             data-easing="easeInOutCubic"
+                             data-endspeed="300">
                             @headline.Subtitle
                         </div>
 
                         <div class="tp-caption lft custom-font-2"
-                        data-x="600"
-                        data-y="190"
-                        data-speed="800"
-                        data-start="800"
-                        data-easing="easeInOutCubic">
+                             data-x="600"
+                             data-y="190"
+                             data-speed="600"
+                             data-start="600"
+                             data-easing="easeInOutCubic">
                             @headline.Title
                         </div>
 
                         <div class="tp-caption sfb text-left"
-                        data-x="600"
-                        data-y="240"
-                        data-speed="800"
-                        data-start="1400"
-                        data-easing="easeInOutCubic">
-                            @headline.Description
+                             data-x="600"
+                             data-y="240"
+                             data-speed="600"
+                             data-start="1000"
+                             data-easing="easeInOutCubic">
+                            @Html.Raw(headline.Description)
                         </div>
 
                         <div class="tp-caption sfb text-left"
-                        data-x="600"
-                        data-y="310"
-                        data-speed="800"
-                        data-start="1600"
-                        data-easing="easeInOutCubic">
+                             data-x="600"
+                             data-y="310"
+                             data-speed="600"
+                             data-start="1200"
+                             data-easing="easeInOutCubic">
                             <a class="btn btn-slider" href="@headline.Url">Read More</a>
                         </div>
                     </li>
@@ -175,9 +178,7 @@
 
                 </div>
 
-                <div class="col-md-6 wow fadeInUp">
-                    <img src="img/misc/pic-4.png" class="img-responsive" alt="">
-                </div>
+               
             </div>
         </div>
     </section>

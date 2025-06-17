@@ -39,6 +39,8 @@ builder.Services.AddScoped<MinistryInfoServices, MinistryInfoServices>();
 builder.Services.AddScoped<MinistryLeaderServices, MinistryLeaderServices>();
 builder.Services.AddScoped<MinistryScheduleServices, MinistryScheduleServices>();
 builder.Services.AddScoped<TestimonialServices, TestimonialServices>();
+builder.Services.AddScoped<MinistryAlbumServices, MinistryAlbumServices>();
+builder.Services.AddScoped<CommunityAlbumServices, CommunityAlbumServices>();
 
 
 var app = builder.Build();

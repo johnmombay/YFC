@@ -58,5 +58,7 @@ namespace Web.YFC.Common
 		public static string MinistryInfoEndpoint = "/MinistryInfos";
 		public static string MinistryLeaderEndpoint = "/MinistryLeaders";
 		public static string MinistryScheduleEndpoint = "/MinistrySchedules";
+		public static string CommunityAlbumEndpoint = "/CommunityAlbums";
+		public static string MinistryAlbumEndpoint = "/MinistryAlbums";
 	}
 }

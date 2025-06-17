@@ -71,6 +71,28 @@ namespace Api.YFC.Migrations
                     b.ToTable("Communities");
                 });
 
+            modelBuilder.Entity("Api.YFC.Models.CommunityAlbum", b =>
+                {
+                    b.Property<int>("CommunityAlbumId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CommunityAlbumId"));
+
+                    b.Property<string>("AlbumId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CommunityId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CommunityAlbumId");
+
+                    b.HasIndex("CommunityId");
+
+                    b.ToTable("CommunityAlbums");
+                });
+
             modelBuilder.Entity("Api.YFC.Models.CommunityArticle", b =>
                 {
                     b.Property<int>("CommunityArticleId")
@@ -315,6 +337,28 @@ namespace Api.YFC.Migrations
                     b.HasKey("MinistryId");
 
                     b.ToTable("Ministries");
+                });
+
+            modelBuilder.Entity("Api.YFC.Models.MinistryAlbum", b =>
+                {
+                    b.Property<int>("MinistryAlbumId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MinistryAlbumId"));
+
+                    b.Property<string>("AlbumId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MinistryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("MinistryAlbumId");
+
+                    b.HasIndex("MinistryId");
+
+                    b.ToTable("MinistryAlbums");
                 });
 
             modelBuilder.Entity("Api.YFC.Models.MinistryArticle", b =>
@@ -800,6 +844,17 @@ namespace Api.YFC.Migrations
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
+            modelBuilder.Entity("Api.YFC.Models.CommunityAlbum", b =>
+                {
+                    b.HasOne("Api.YFC.Models.Community", "Community")
+                        .WithMany()
+                        .HasForeignKey("CommunityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Community");
+                });
+
             modelBuilder.Entity("Api.YFC.Models.CommunityArticle", b =>
                 {
                     b.HasOne("Api.YFC.Models.Community", "Community")
@@ -864,6 +919,17 @@ namespace Api.YFC.Migrations
                         .IsRequired();
 
                     b.Navigation("Section");
+                });
+
+            modelBuilder.Entity("Api.YFC.Models.MinistryAlbum", b =>
+                {
+                    b.HasOne("Api.YFC.Models.Ministry", "Ministry")
+                        .WithMany()
+                        .HasForeignKey("MinistryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ministry");
                 });
 
             modelBuilder.Entity("Api.YFC.Models.MinistryArticle", b =>

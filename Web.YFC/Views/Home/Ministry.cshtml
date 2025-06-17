@@ -14,7 +14,6 @@
 
 <div class="clearfix"></div>
 
-<!-- content begin -->
 <div id="content">
     <div class="container">
         <div class="row">
@@ -22,102 +21,96 @@
                 <div class="blog-read">
                     <div>
                         <div class="preview">
-                            @Html.Raw(ViewBag.Information)
+                            <a href="#">
+                                <h3 class="blog-title">@ViewBag.Ministry Ministry</h3>
+                            </a>
+                            <p>
+                                @Html.Raw(ViewBag.Information)
+                            </p>
                         </div>
+
+                        <div id="blog-comment" style="text-align: left;">
+                            <h3>Ministry Leaders</h3>
+                            <table class="table table-striped">
+                                @foreach (var leader in ViewData["Leaders"] as IEnumerable<MinistryLeader>)
+                                {
+                                    <tr>
+                                        <td>@leader.Name</td>
+                                        <td>@leader.Email</td>
+                                    </tr>
+                                }
+                            </table>
+                        </div>
+
+                        <div id="blog-comment" style="text-align: left;">
+                            <h3>Ministry Articles</h3>
+                            <div class="clearfix">&nbsp;</div>
+                            <ul style="text-align: left; list-style-position: inside;">
+                                @foreach (var article in ViewData["Articles"] as IEnumerable<MinistryArticle>)
+                                {
+                                    <li>
+                                        <div class="preview">
+                                            <a href="news-single.html">
+                                                <h3 class="blog-title">@article.Title</h3>
+                                            </a>@article
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+
+                        <div id="blog-comment" style="text-align: left;">
+                            <h3>Community Album</h3>
+                            <div class="clearfix">&nbsp;</div>
+                            <table class="table table-striped">
+                                @foreach (var rss in ViewData["RssAlbums"] as IEnumerable<RSSAlbumData>)
+                                {
+                                    <tr>
+                                        <td><a asp-action="CommunityAlbum" asp-route-id="@rss.AlbumId"><img src="@rss.ImageUrl" class="img-chef img-responsive" /></a></td>
+                                        <td valign="middle">
+                                            <h4>@rss.Title</h4>
+                                            <div>Album : <a href="@rss.Link">@rss.AlbumId</a></div>
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        </div>
+
                     </div>
+
                 </div>
+
             </div>
-            <div class="col-md-4">
-                <div class="blog-read">
-                    <h3>Leadership Team</h3>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Email Address</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var leader in ViewData["Leaders"] as IEnumerable<MinistryLeader>)
-                            {
-                                <tr>
-                                    <td>@leader.Name</td>
-                                    <td>@leader.Email</td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+
+            <div id="sidebar" class="col-md-4">
+
+                <div class="widget latest_news">
+                    <h3>Schedule</h3>
+                    <ul class="bloglist-small">
+                        @foreach (var schedule in ViewData["Schedules"] as IEnumerable<MinistrySchedule>)
+                        {
+                            <p class="clearfix">&nbsp;</p>
+                            <li>
+                                <div class="date-box">
+                                    <span class="day">@schedule.Day.ToString().Substring(0, 3)</span>
+                                    <span class="month">@DateTime.Now.ToString("MMM").ToUpper()</span>
+                                </div>
+                                <div class="txt">
+                                    <h5><a href="css/#">@schedule.Title </a></h5>
+                                    <div>
+                                        <div>@schedule.Description </div>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    </ul>
                 </div>
-                <div class="blog-read">
-                    <h3>Schedules</h3>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Description</th>
-                                <th>Day</th>
-                                <th>Time</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var schedule in ViewData["Schedules"] as IEnumerable<MinistrySchedule>)
-                            {
-                                <tr>
-                                    <td>@schedule.Title</td>
-                                    <td>@schedule.Description</td>
-                                    <td>@schedule.Day</td>
-                                    <td>@schedule.Time.ToString("hh:mm tt")</td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-                <div class="blog-read">
-                    <h3>Latest Articles</h3>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var article in ViewData["Articles"] as IEnumerable<MinistryArticle>)
-                            {
-                                <tr>
-                                    <td><a asp-action="CommunityArticleContent" asp-route-id="@article.MinistryArticleId">@article.Title</a></td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
+
             </div>
         </div>
+
+        <div class="map">
+        </div>
+
     </div>
-
-    <!-- section begin -->
-    <section id="section-text">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2 text-center wow fadeInUp">
-                    <h2>Upcoming Events</h2>
-                    <div class="divider-double"></div>
-                </div>
-
-                @foreach (var _event in ViewData["Events"] as IEnumerable<MinistryEvent>)
-                {
-                    <div class="col-md-4 wow fadeInRight" data-wow-delay=".5s">
-                        <img src="@AppSettings.ImageUrl/Churches/@_event.MinistryEventId/@_event.Picture" class="img-responsive" alt="">
-                        <h3>@_event.Title</h3>
-                        <span>
-                            @_event.Description<br />
-                            @_event.EventDate.ToString("MMMM dd, yyyy hh mm tt")
-                        </span>
-                    </div>
-                }
-            </div>
-        </div>
-    </section>
-    <!-- section close -->
-
 </div>
-<!-- content close -->

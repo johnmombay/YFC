@@ -23,5 +23,7 @@ namespace Web.YFC.Data
 		public DbSet<Section> Sections { get; set; }
 		public DbSet<Content> Contents { get; set; }
 		public DbSet<Testimonial> Testimonials { get; set; }
+		public DbSet<CommunityAlbum> CommunityAlbums { get; set; }
+		public DbSet<MinistryAlbum> MinistryAlbums { get; set; }
 	}
 }

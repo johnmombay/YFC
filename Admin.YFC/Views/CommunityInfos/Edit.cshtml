@@ -16,7 +16,7 @@
                             <form asp-action="Edit">
                                 <input type="hidden" asp-for="CommunityInfoId" />
                                 <div class="form-group">
-                                    <label asp-for="CommunityId"></label>
+                                    <label asp-for="CommunityId">Community</label>
                                     <select asp-for="CommunityId" class="form-control" asp-items="@ViewBag.Communities"></select>
                                 </div>
                                 <div class="form-group">

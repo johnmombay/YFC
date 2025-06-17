@@ -1,5 +1,6 @@
 ﻿using Admin.YFC.Models;
 using Admin.YFC.Services;
+using Admin.YFC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -28,7 +29,23 @@ namespace Admin.YFC.Controllers
 		public async Task<IActionResult> GetMinistryEvents()
 		{
 			var ministryEvents = await _ministryEventServices.GetMinistryEvents();
-			return Json(new { data = ministryEvents });
+			var ministries = await _ministryServices.GetMinistries();
+			List<MinistryEventViewModel> ministryEventsViewModel = new List<MinistryEventViewModel>();
+			foreach(var ministryEvent in ministryEvents)
+			{
+				var ministry = ministries.FirstOrDefault(c => c.MinistryId == ministryEvent.MinistryId);
+				ministryEventsViewModel.Add(new MinistryEventViewModel
+				{
+					MinistryEventId = ministryEvent.MinistryEventId,
+					MinistryId = ministryEvent.MinistryId,
+					Ministry = ministry?.Name, // Map the ministry name explicitly
+					Title = ministryEvent.Title,
+					Description = ministryEvent.Description,
+					EventDate = ministryEvent.EventDate,
+					Picture = ministryEvent.Picture
+				});
+			}
+			return Json(new { data = ministryEventsViewModel });
 		}
 
 		public async Task<IActionResult> Create()

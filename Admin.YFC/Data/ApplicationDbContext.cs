@@ -28,10 +28,12 @@ namespace Admin.YFC.Data
 		public DbSet<MinistryArticle> MinistryArticles { get; set; }
 		public DbSet<CommunityArticle> CommunityArticles { get; set; }
 		public DbSet<CommunityLeader> CommunityLeaders { get; set; }
+		public DbSet<CommunityAlbum> CommunityAlbums { get; set; }
 		public DbSet<MinistryLeader> MinistryLeaders { get; set; }
 		public DbSet<CommunitySchedule> CommunitySchedules { get; set; }
 		public DbSet<MinistrySchedule> MinistrySchedules { get; set; }
 		public DbSet<CommunityEvent> CommunityEvents { get; set; }
 		public DbSet<MinistryEvent> MinistryEvents { get; set; }
+		public DbSet<MinistryAlbum> MinistryAlbums { get; set; }
 	}
 }

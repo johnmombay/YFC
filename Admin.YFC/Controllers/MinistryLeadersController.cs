@@ -1,5 +1,6 @@
 ﻿using Admin.YFC.Models;
 using Admin.YFC.Services;
+using Admin.YFC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -25,7 +26,21 @@ namespace Admin.YFC.Controllers
 		public async Task<IActionResult> GetMinistryLeaders()
 		{
 			var ministryLeaders = await _ministryLeaderServices.GetMinistryLeaders();
-			return Json(new { data = ministryLeaders });
+			var ministries = await _ministryServices.GetMinistries();
+			List<MinistryLeaderViewModel> ministryLeadersViewModel = new List<MinistryLeaderViewModel>();
+			foreach( var ministry in ministryLeaders)
+			{
+				var ministryLeader = ministries.FirstOrDefault(c => c.MinistryId == ministry.MinistryId);
+				ministryLeadersViewModel.Add(new MinistryLeaderViewModel
+				{
+					MinistryLeaderId = ministry.MinistryLeaderId,
+					MinistryId = ministry.MinistryId,
+					Ministry = ministryLeader?.Name, // Map the ministry name explicitly
+					Name = ministry.Name,
+					Email = ministry.Email
+				});
+			}
+			return Json(new { data = ministryLeadersViewModel });
 		}
 
 		public async Task<IActionResult> Create()

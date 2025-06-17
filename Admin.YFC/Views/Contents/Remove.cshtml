@@ -16,7 +16,7 @@
                             <form asp-action="Delete">
                                 <input type="hidden" asp-for="ContentId" />
                                 <div class="form-group">
-                                    <label asp-for="SectionId"></label>
+                                    <label asp-for="SectionId">Section</label>
                                     <select asp-for="SectionId" class="form-control" asp-items="@ViewBag.Sections"></select>
                                 </div>
                                 <div class="form-group">

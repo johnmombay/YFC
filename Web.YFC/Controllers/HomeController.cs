@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Xml.Linq;
 using Web.YFC.Common;
 using Web.YFC.Models;
 using Web.YFC.Services;
@@ -30,6 +31,8 @@ namespace Web.YFC.Controllers
 		private readonly MinistryScheduleServices _ministryScheduleServices;
 		private readonly CommunityServices _communityServices;
 		private readonly MinistryServices _ministryServices;
+		private readonly MinistryAlbumServices _ministryAlbumServices;
+		private readonly CommunityAlbumServices _communityAlbumServices;
 
 		public HomeController(ILogger<HomeController> logger,
 			HeadlineServices headlineServices,
@@ -52,7 +55,10 @@ namespace Web.YFC.Controllers
 			MinistryLeaderServices ministryLeaderServices,
 			MinistryScheduleServices ministryScheduleServices,
 			CommunityServices communityServices,
-			MinistryServices ministryServices)
+			MinistryServices ministryServices,
+			CommunityAlbumServices communityAlbumServices,
+			MinistryAlbumServices ministryAlbumServices
+			)
 		{
 			_logger = logger;
 			_headlineServices = headlineServices;
@@ -76,6 +82,8 @@ namespace Web.YFC.Controllers
 			_ministryScheduleServices = ministryScheduleServices;
 			_communityServices = communityServices;
 			_ministryServices = ministryServices;
+			_ministryAlbumServices = ministryAlbumServices;
+			_communityAlbumServices = communityAlbumServices;
 		}
 
 		public async Task<IActionResult> Index()
@@ -119,6 +127,127 @@ namespace Web.YFC.Controllers
 			ViewData["Events"] = await _communityEventServices.GetCommunityEventsByCommunityId(id);
 			ViewData["Schedules"] = await _communityScheduleServices.GetCommunitySchedulesByCommunityId(id);
 			ViewData["Articles"] = await _communityArticleServices.GetCommunityArticlesByCommunityId(id);
+
+			var communityAlbum = await _communityAlbumServices.GetCommunityAlbumByComunityId(id);
+
+			// Create a list to store RSS data
+			var rssAlbumList = new List<RSSAlbumData>();
+
+			// Parse RSS feed from Flickr
+			try
+			{
+				using (HttpClient client = new HttpClient())
+				{
+					foreach (var album in communityAlbum)
+					{
+						string rssUrl = "https://www.flickr.com/services/feeds/photoset.gne?set=" + album.AlbumId + "&nsid=202830723@N07&lang=en-us&format=rss_200";
+
+						try
+						{
+							string rssContent = await client.GetStringAsync(rssUrl);
+							XDocument rssDoc = XDocument.Parse(rssContent);
+
+							// Extract channel title and image URL
+							var channel = rssDoc.Descendants("channel").FirstOrDefault();
+							if (channel != null)
+							{
+								var rssData = new RSSAlbumData
+								{
+									Title = channel.Element("title")?.Value ?? "No Title",
+									Link = channel.Element("link")?.Value ?? "No Link",
+									ImageUrl = channel.Element("image")?.Element("url")?.Value ?? "No URL",
+									AlbumId = album.AlbumId
+								};
+
+								rssAlbumList.Add(rssData);
+							}
+						}
+						catch (Exception albumEx)
+						{
+							// Handle individual album errors, continue with other albums
+							var errorData = new RSSAlbumData
+							{
+								Title = "Error loading album",
+								ImageUrl = "",
+								AlbumId = album.AlbumId
+							};
+							rssAlbumList.Add(errorData);
+
+							// Log individual album error if needed
+							// _logger.LogError(albumEx, $"Error parsing RSS feed for album {album.AlbumId}");
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				// Handle any general errors gracefully
+				// _logger.LogError(ex, "General error in RSS processing");
+			}
+
+			// Pass the list to the view
+			ViewData["RssAlbums"] = rssAlbumList;
+
+			return View();
+		}
+
+		public async Task<IActionResult> CommunityAlbum(string id)
+		{
+			// Create a list to store RSS photo items
+			var rssPhotoItems = new List<RssPhotoItem>();
+
+			try
+			{
+				string rssUrl = "https://www.flickr.com/services/feeds/photoset.gne?set=" + id + "&nsid=202830723@N07&lang=en-us&format=rss_200";
+
+				using (HttpClient client = new HttpClient())
+				{
+					string rssContent = await client.GetStringAsync(rssUrl);
+					XDocument rssDoc = XDocument.Parse(rssContent);
+
+					// Get all item elements
+					var items = rssDoc.Descendants("item");
+
+					foreach (var item in items)
+					{
+						// Parse media content for image URL
+						XNamespace mediaNs = "http://search.yahoo.com/mrss/";
+						var mediaContent = item.Element(mediaNs + "content");
+						var mediaThumbnail = item.Element(mediaNs + "thumbnail");
+
+						// Parse date taken
+						XNamespace dcNs = "http://purl.org/dc/elements/1.1/";
+						var dateTakenElement = item.Element(dcNs + "date.Taken");
+						DateTime dateTaken = DateTime.Now;
+						if (dateTakenElement != null)
+						{
+							DateTime.TryParse(dateTakenElement.Value, out dateTaken);
+						}
+
+						var photoItem = new RssPhotoItem
+						{
+							Title = item.Element("title")?.Value ?? "No Title",
+							Link = item.Element("link")?.Value ?? "",
+							Description = item.Element("description")?.Value ?? "",
+							ImageUrl = mediaContent?.Attribute("url")?.Value ?? "",
+							ThumbnailUrl = mediaThumbnail?.Attribute("url")?.Value ?? "",
+							DateTaken = dateTaken
+						};
+
+						rssPhotoItems.Add(photoItem);
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				// Handle any errors gracefully
+				// _logger.LogError(ex, $"Error parsing RSS feed for album {id}");
+				ViewBag.ErrorMessage = "Error loading gallery images";
+			}
+
+			// Pass the list to the view
+			ViewData["PhotoItems"] = rssPhotoItems;
+
 			return View();
 		}
 
@@ -130,6 +259,127 @@ namespace Web.YFC.Controllers
 			ViewData["Events"] = await _ministryEventServices.GetMinistryEventsByMinistryId(id);
 			ViewData["Schedules"] = await _ministryScheduleServices.GetMinistrySchedulesByMinistryId(id);
 			ViewData["Articles"] = await _ministryArticleServices.GetMinistryArticlesByMinistryId(id);
+
+			var communityAlbum = await _ministryAlbumServices.GetMinistryAlbumByMinistryId(id);
+
+			// Create a list to store RSS data
+			var rssAlbumList = new List<RSSAlbumData>();
+
+			// Parse RSS feed from Flickr
+			try
+			{
+				using (HttpClient client = new HttpClient())
+				{
+					foreach (var album in communityAlbum)
+					{
+						string rssUrl = "https://www.flickr.com/services/feeds/photoset.gne?set=" + album.AlbumId + "&nsid=202830723@N07&lang=en-us&format=rss_200";
+
+						try
+						{
+							string rssContent = await client.GetStringAsync(rssUrl);
+							XDocument rssDoc = XDocument.Parse(rssContent);
+
+							// Extract channel title and image URL
+							var channel = rssDoc.Descendants("channel").FirstOrDefault();
+							if (channel != null)
+							{
+								var rssData = new RSSAlbumData
+								{
+									Title = channel.Element("title")?.Value ?? "No Title",
+									Link = channel.Element("link")?.Value ?? "No Link",
+									ImageUrl = channel.Element("image")?.Element("url")?.Value ?? "No URL",
+									AlbumId = album.AlbumId
+								};
+
+								rssAlbumList.Add(rssData);
+							}
+						}
+						catch (Exception albumEx)
+						{
+							// Handle individual album errors, continue with other albums
+							var errorData = new RSSAlbumData
+							{
+								Title = "Error loading album",
+								ImageUrl = "",
+								AlbumId = album.AlbumId
+							};
+							rssAlbumList.Add(errorData);
+
+							// Log individual album error if needed
+							// _logger.LogError(albumEx, $"Error parsing RSS feed for album {album.AlbumId}");
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				// Handle any general errors gracefully
+				// _logger.LogError(ex, "General error in RSS processing");
+			}
+
+			// Pass the list to the view
+			ViewData["RssAlbums"] = rssAlbumList;
+
+			return View();
+		}
+
+		public async Task<IActionResult> MinistryAlbum(string id)
+		{
+			// Create a list to store RSS photo items
+			var rssPhotoItems = new List<RssPhotoItem>();
+
+			try
+			{
+				string rssUrl = "https://www.flickr.com/services/feeds/photoset.gne?set=" + id + "&nsid=202830723@N07&lang=en-us&format=rss_200";
+
+				using (HttpClient client = new HttpClient())
+				{
+					string rssContent = await client.GetStringAsync(rssUrl);
+					XDocument rssDoc = XDocument.Parse(rssContent);
+
+					// Get all item elements
+					var items = rssDoc.Descendants("item");
+
+					foreach (var item in items)
+					{
+						// Parse media content for image URL
+						XNamespace mediaNs = "http://search.yahoo.com/mrss/";
+						var mediaContent = item.Element(mediaNs + "content");
+						var mediaThumbnail = item.Element(mediaNs + "thumbnail");
+
+						// Parse date taken
+						XNamespace dcNs = "http://purl.org/dc/elements/1.1/";
+						var dateTakenElement = item.Element(dcNs + "date.Taken");
+						DateTime dateTaken = DateTime.Now;
+						if (dateTakenElement != null)
+						{
+							DateTime.TryParse(dateTakenElement.Value, out dateTaken);
+						}
+
+						var photoItem = new RssPhotoItem
+						{
+							Title = item.Element("title")?.Value ?? "No Title",
+							Link = item.Element("link")?.Value ?? "",
+							Description = item.Element("description")?.Value ?? "",
+							ImageUrl = mediaContent?.Attribute("url")?.Value ?? "",
+							ThumbnailUrl = mediaThumbnail?.Attribute("url")?.Value ?? "",
+							DateTaken = dateTaken
+						};
+
+						rssPhotoItems.Add(photoItem);
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				// Handle any errors gracefully
+				// _logger.LogError(ex, $"Error parsing RSS feed for album {id}");
+				ViewBag.ErrorMessage = "Error loading gallery images";
+			}
+
+			// Pass the list to the view
+			ViewData["PhotoItems"] = rssPhotoItems;
+
 			return View();
 		}
 
